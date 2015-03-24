@@ -1,0 +1,43 @@
+<!--
+TODO:
+- maybe make this page into a dashboard with tickers and graphs?
+-->
+
+{% extends 'base.html' %}
+ 
+{% block title %} Home {% endblock %}
+ 
+{% block content1 %}
+    <h1>Enter Text</h1>
+        <section class="input-form">
+            <form class="submit-form" action="/submit/" method="GET">{% csrf_token %}
+                <input id="textform" type="text" name="text"><br>
+                {{ form.post }}
+
+
+                <input type="submit" value="Submit">
+                <a href="/results/">yo</a>
+            </form>
+    </section>
+{% endblock %}
+{% block content2 %}
+    <div class="panel">
+      most oversused words
+    </div>
+    <a href="">
+      <div class="suggestion-panel">
+        + Word 1 - Definition
+      </div>
+    </a>
+    <a href="">
+      <div class="suggestion-panel">
+        + Word 2 - Definition
+      </div>
+    </a>
+    <a href="">
+      <div class="suggestion-panel">
+        + Word 3 - Definition
+      </div>
+    </a> 
+{% endblock %}
+

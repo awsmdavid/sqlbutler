@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Essay Better</title>
+        <link rel="stylesheet" href="{{STATIC_URL}}/../stylesheets/app.css" />
+        <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+        <script src="bower_components/modernizr/modernizr.js"></script>        
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
+    
+        <!-- <link rel="icon" type="image/jpg" href="http://static.thoughtfulgiftgenerator.com/img/tgg.ico"> -->
+
+        <!--meta content-->
+        <meta content='yes' name='apple-mobile-web-app-capable'>
+        <meta content='Essay Better!' name='apple-mobile-web-app-title'>
+        <meta content='default' name='apple-mobile-web-app-status-bar-style'>
+        <meta content='width=device-width,height=device-height,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0' name='viewport'>
+        <meta content='Essay Better' property='og:title'>
+        <meta content='http://www.essaybetter.com' property='og:url'>
+        <!-- <meta content='http://static.essaybetter.com/img/tgg-mast2.png' property='og:image'> -->
+        <meta content='Essay Up.' property='og:description'>
+
+        </head>
+
+        <body>
+            <div class="row">
+              <h1>
+                Essay Better
+              </h1>
+            </div>
+
+            <div class="row">
+              <div class="large-8 columns">
+
+                {% block content1 %}
+
+                {% endblock %}
+                
+              </div>
+              <div class="large-4 columns">
+
+                {% block content2 %}
+
+                {% endblock %}
+
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="large-12 columns">
+                
+              </div>
+            </div>
+
+            <script src="bower_components/jquery/dist/jquery.min.js"></script>
+            <script src="bower_components/foundation/js/foundation.min.js"></script>
+            <script src="js/app.js"></script>
+        </body>
+
+
+    <footer class="footer">
+          <a href="http://essaybetter.com">essaybetter.com</a> // designed in DC // © 2015</a>
+    <footer>
+</html> 
