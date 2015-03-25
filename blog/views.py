@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.db.models import Q
 from collections import Counter, defaultdict
-from blog.models import textForm, searchResults
+from blog.models import textForm, essayData
 import string
 import operator
 
@@ -19,9 +19,9 @@ def index(request):
 def results(request):
     if request.method == 'POST':
         form = textForm(request.POST)
-        search_results = searchResults
         yo = request.POST.get('text')
-        return render(request, 'blog/results.html', { 'search_results': yo})
+        essay_data = essayData(text=yo)
+        return render(request, 'blog/results.html', { 'search_results': essay_data})
     return render(request, 'blog/index.html')
 
 

@@ -5,7 +5,7 @@
     <section class="input-form">
         <form action="/results/" method="POST">
             {% csrf_token %}
-            <textarea name="text" rows="20" cols="60">{{ form.text }}</textarea>
+            <textarea name="text" rows="20" cols="60">{{ text }}</textarea>
             <br>
             <!-- <input id="textform" type="text" name="text"><br> -->
             <input type="submit" value="Submit">
