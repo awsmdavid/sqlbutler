@@ -1,22 +1,19 @@
 {% extends 'base.html' %}
  
 {% block content1 %}
-    <h1>
+<!--     <h1>
         Your Text
-    </h1>
+    </h1> -->
     <div>
-        {{search_results.text}}<br>
+        <h2>original text</h2>
+        <div class="panel">
+            {{search_results.text}}
+        </div>
+        <h2>list of words</h2>
         {{search_results.word_list}}<br>
+        <h2>count of words minus articles</h2>
         {{search_results.words_count}}<br>
-        {{search_results.top_words}}<br>
-        WORDS:<br>
-        {{top_words.iteritems}}<br>
-        {{top_words}}<br>
-        {% for word in top_words %}
-            <li>{{ word.0 }} , {{ word.1 }} </li>
-        {% endfor %}
 
-        <!-- {{search_results.top_words_count}}<br>                 -->
         <br>
         
     </div>
@@ -26,11 +23,14 @@
     <div class="panel">
         most oversused words
     </div>
-
-      <div class="panel">
-<!--         {{top_word.word}}<br>
-        {{top_word.count}} uses<br>      --> 
-      </div>
+    {% for word in new_list %}
+        <div class="panel">
+            <h3>{{ word.0.0 }}</h3>
+            <br> Count {{ word.0.1 }}
+            <div>Alternate Suggestions:</div>
+            <div>Count {{ word.0.2 }} </div>
+        </div>
+    {% endfor %}
 
 </div>    
 {% endblock %}
