@@ -12,7 +12,7 @@ from django.core.context_processors import csrf
 
 
 articles = ["a", "the", "an"]
-common_words = ["i", "you", "he", "she", "it", "they", "is"]
+common_words = ["i", "you", "he", "she", "it", "they", "is", "and", "to", "we", "of", "that"]
 
 def index(request):
     return render(request, 'blog/index.html')
