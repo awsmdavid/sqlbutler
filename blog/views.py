@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.db.models import Q
-from collections import Counter, defaultdict
-from blog.models import essayData
+from collections import Counter, defaultdict, OrderedDict
+from blog.models import essayData, word
 import string
 import operator
 
@@ -24,11 +24,30 @@ def results(request):
         words_without_punc = text.translate(string.maketrans("",""), string.punctuation)
         # generate iterable of words
         words = words_without_punc.split()
-        # count words
-        word_list = Counter(words)
+        # count words and generate key value pair
+        words_count = Counter(words)
 
-        essay_data = essayData(text=text, word_list = word_list)
-        return render(request, 'blog/results.html', { 'search_results': essay_data})
+        articles = ["a", "the", "an"]
+        # remove articles
+        for a in articles:
+            del words_count[a]
+        words_and_count_array = words_count
+
+        # returns n most common elements in counter, converts counter to dict
+        n=3
+        top_words = words_and_count_array.most_common()[:3]
+
+
+        # define top words
+        # takes first tuple in words_count.most_common, and then takes the first item (the word) of that tuple
+        top_word = words_and_count_array.most_common()[0][0]
+        # takes count of that tuple
+        count_of_top_word = words_and_count_array.most_common()[0][1]
+
+
+        essay_data = essayData(text=text, word_list = words, words_count = words_count, top_words = top_word)
+        top_word = word(word=top_word, count=count_of_top_word)
+        return render(request, 'blog/results.html', { 'search_results': essay_data, 'top_words': words_and_count_array.most_common()[:3]})
     return render(request, 'blog/index.html')
 
 

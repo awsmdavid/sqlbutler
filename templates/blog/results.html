@@ -6,7 +6,17 @@
     </h1>
     <div>
         {{search_results.text}}<br>
-        {{search_results.word_list}}
+        {{search_results.word_list}}<br>
+        {{search_results.words_count}}<br>
+        {{search_results.top_words}}<br>
+        WORDS:<br>
+        {{top_words.iteritems}}<br>
+        {{top_words}}<br>
+        {% for word in top_words %}
+            <li>{{ word.0 }} , {{ word.1 }} </li>
+        {% endfor %}
+
+        <!-- {{search_results.top_words_count}}<br>                 -->
         <br>
         
     </div>
@@ -14,17 +24,13 @@
 
 {% block content2 %}
     <div class="panel">
-      most oversused words
+        most oversused words
     </div>
 
-
-    <!-- {% for giftIdea in gift_idea_secondary_results %} -->
-    <a href="">
-      <div class="suggestion-panel">
-        + Word 1 - Definition
+      <div class="panel">
+<!--         {{top_word.word}}<br>
+        {{top_word.count}} uses<br>      --> 
       </div>
-    </a>
-    <!-- {% endfor %} -->
 
 </div>    
 {% endblock %}
