@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.db.models import Q
 from collections import Counter, defaultdict
-from blog.models import textForm, essayData
+from blog.models import essayData
 import string
 import operator
 
@@ -18,11 +18,19 @@ def index(request):
 
 def results(request):
     if request.method == 'POST':
-        form = textForm(request.POST)
-        yo = request.POST.get('text')
-        essay_data = essayData(text=yo)
+        # cast request essay as string and store
+        text = str(request.POST.get('text'))
+        # strip punctuation
+        words_without_punc = text.translate(string.maketrans("",""), string.punctuation)
+        # generate iterable of words
+        words = words_without_punc.split()
+        # count words
+        word_list = Counter(words)
+
+        essay_data = essayData(text=text, word_list = word_list)
         return render(request, 'blog/results.html', { 'search_results': essay_data})
     return render(request, 'blog/index.html')
+
 
 
 
