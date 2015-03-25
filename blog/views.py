@@ -5,7 +5,7 @@ from collections import Counter, defaultdict, OrderedDict
 from blog.models import essayData, word
 import string
 import operator
-
+import codecs
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.core.context_processors import csrf
@@ -23,9 +23,14 @@ def index(request):
 def results(request):
     if request.method == 'POST':
         # cast request essay as string and store
-        text = str(request.POST.get('text'))
+        text = request.POST.get('text')     
+
+        # convert from unicode to text /bytes - prevents crap out from bullets
+        text = text.encode('utf-8').strip()
+
         # strip punctuation
         words_without_punc = text.translate(string.maketrans("",""), string.punctuation)
+
         # generate iterable of words
         words = words_without_punc.split()
 
@@ -36,11 +41,13 @@ def results(request):
         all_words_count = Counter(all_words)
 
         # remove articles and common words
+        # TODO: remove other words?
         for a in articles:
             del all_words_count[a]
 
         for a in common_words:
             del all_words_count[a]
+
         words_and_count_array = all_words_count
 
         # returns n most common elements in counter, converts counter to dict
