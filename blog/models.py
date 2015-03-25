@@ -11,22 +11,12 @@ from collections import Counter, defaultdict
 #     ('Female', 'Female'),
 # )
 
-# AGE_CHOICES = (
-#     ('age_1', '0-5'),
-#     ('age_2', '6-13'),
-#     ('age_3', '14-20'),
-#     ('age_4', '21-34'),
-#     ('age_5', '35-59'),
-#     ('age_6', '60+'),
-# )
+class textForm(forms.Form):
+    text = forms.CharField(max_length=255)
 
-# PRICE_CHOICES = (
-#     ('price_1', '$0-20'),
-#     ('price_2', '$20-50'),
-#     ('price_3', '$50-100'),
-#     ('price_4', '$100+'),    
-# )
+class searchResults(models.Model):
+    text = models.CharField(max_length=255)
 
-class Text(models.Model):
-    text = models.CharField(max_length=25500, blank=True, null=True)
-    words = models.CharField(max_length=25500, blank=True, null=True)
+# class textForm(models.Model):
+#     text = models.CharField(max_length=25500, blank=True, null=True)
+#     words = models.CharField(max_length=25500, blank=True, null=True)

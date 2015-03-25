@@ -1,106 +1,27 @@
 {% extends 'base.html' %}
  
-{% block content %}
-
-<div class="results-page-section-title">
-		Here is your Thoughtfully Generated Result:
-</div>
-
-<!--top results-->
-<div class="top-result-container grid-full shadow-heavy">
-    <div class="grid-half">
-        <div class="gift-result-title">
-	        <a href="{{gift_idea_result.product_link}}" target="_blank">{{gift_idea_result.title}}</a>
-    	</div>
-    	<div>
-        	<a href="{{gift_idea_result.product_link}}" target="_blank">
-        		<img class="top-result-img" src="{{gift_idea_result.image_link}}">
-        	</a>
-    	</div>
+{% block content1 %}
+    <h1>
+        Your Text
+    </h1>
+    <div>
+        {{search_results}}
     </div>
-    <div class="grid-half results-metadata">
-    	<strong>
-    		Description:
-    	</strong>
-    	<div>
-        	{{gift_idea_result.description}}
-    	</div>
-    	<div>
-        	<strong>Price: </strong>        		
-<!--         		<div id="top-price-history">
-        			${{gift_idea_result.price}}
-        			<div href="{{camelLinkUrl}}" target="_blank">[Price History]
-        				<span>
-        					<img src="{{camelChartUrl}}" alt="{{gift_idea_result.title}} price history"/>
-        				</span>
-        			</div>
-        		</div> -->
-        		<div id="top-price-history">
-        			${{gift_idea_result.price}}
-        			<a href="{{camelLinkUrl}}" target="_blank">[Price History]
-        			</a>
-        		</div>
+{% endblock %}
 
-                
-                <div class="product_link" >
-                    test
-                </div>
-<!--     		<div>
-    			<strong>
-    				Price History
-    			</strong>
-        	<a href="{{camelLinkUrl}}" target="_blank">
-        		<img class="top-result-price-history-img" src="{{camelChartUrl}}">
-        	</a>
-        	(powered by <a href="http://www.camelcamelcamel.com" target="_blank">camelcamelcamel.com</a>)
-        	</div> -->
-    	</div>
-    	<div>
-        	<a href="{{gift_idea_result.product_link}}" target="_blank">Product Link</a>
-    	</div>
-    	<div>
-        	<strong>Upvotes: </strong>{{gift_idea_result.upvote}}
-    	</div>
-                <div class="upvote-container">
-                    <a class="upvote" href="/upvote/{{gift_idea_result.slug}}">
-                        <span>
-                              {{gift_idea_result.upvote}}
-                        </span> Upvote
-                    </a>
-                    <a class="upvoted" style="display:none;"><span class="updated-upvote">{{gift_idea_result.upvote}}</span> Upvoted!</a>
-                </div>
+{% block content2 %}
+    <div class="panel">
+      most oversused words
     </div>
-</div>
 
-<!--secondary results-->
-<div class="results-page-section-title">
-	Other Thoughtful Gifts:
-</div>
-<div class="secondary-results-container grid-full">
-    {% for giftIdea in gift_idea_secondary_results %}
-    	<div class="secondary-results grid-third shadow-light">
-	        <center>
-		        <div class="secondary-results-title">
-                    <a href="{{giftIdea.product_link}}" target="_blank">
-        		        {{giftIdea.title}}
-                    </a>
-		    	</div>
-		    	<div class="secondary-results-content">
-		        	<a href="{{giftIdea.product_link}}" target="_blank">
-		        		<img class="secondary-results-img" src="{{giftIdea.image_link}}">
-		        	</a>
 
-		    	<div>
-		        	Price: ${{giftIdea.price}}
-		    	</div>   	
-		    	<div>
-		        	<a href="{{giftIdea.product_link}}" target="_blank">Product Link</a>
-		    	</div>
-			    <div>
-		        	Upvotes: {{giftIdea.upvote}}
-		    	</div>
-		    </center>
-		</div>
-    {% endfor %}
+    <!-- {% for giftIdea in gift_idea_secondary_results %} -->
+    <a href="">
+      <div class="suggestion-panel">
+        + Word 1 - Definition
+      </div>
+    </a>
+    <!-- {% endfor %} -->
+
 </div>    
 {% endblock %}
