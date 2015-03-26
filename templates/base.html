@@ -6,11 +6,9 @@
         <title>Essay Better</title>
         <!-- deployment sheet -->
         <link rel="stylesheet" href="http://assets.essaybetter.com/stylesheets/app.css" />
+        <script src="http://assets.essaybetter.com/bower_components/modernizr/modernizr.js"></script>
 
         <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
-        <!-- deployment sheet -->
-        <script src="http://assets.essaybetter.com/bower_components/modernizr/modernizr.js"></script>
- 
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
     
         <!-- <link rel="icon" type="image/jpg" href="http://static.thoughtfulgiftgenerator.com/img/tgg.ico"> -->
@@ -26,26 +24,41 @@
         <meta content='Essay Up.' property='og:description'>
         <script>
 
-        $(document).ready(function() {
-            $('#test').click(function(){
-                alert("yo");
-                //$('#background-image').removeClass();
-            });
-            // javascript identify words, replace "word" with "<span class="highlighted-word">word</span>
-            // $('#div').html($('#div').html().replace(/</g,'somethingElse'));
-        });
+        // $(document).ready(function() {
+        //     $('#test').click(function(){
+        //         alert("yo");
+        //         //$('#background-image').removeClass();
+        //     });
+        //     // javascript identify words, replace "word" with "<span class="highlighted-word">word</span>
+        //     // $('#div').html($('#div').html().replace(/</g,'somethingElse'));
+        // });
         </script>
     </head>
 
 
     <body>
-        <a href="/">
-            <div class="row">
-              <h1>
-                Essay Better
-              </h1>
+        <div class="row">
+            <div class="large-8 columns"> 
+                <a href="/">
+                    <h1>
+                        Essay Better
+                    </h1>
+                </a>
             </div>
-        </a>
+            <div class="large-4 columns share-container">
+                <a href="http://google.com" target="_blank">
+                    <img class="share-button" src="{{STATIC_URL}}/goog.png"/>
+                </a>
+                <a href="http://twitter.com" target="_blank">
+                    <img class="share-button" src="{{STATIC_URL}}/twtr.png"/>
+                </a>
+                <a href="http://facebook.com" target="_blank">
+                    <img class="share-button" src="{{STATIC_URL}}/fb.png"/>
+                </a>
+                
+
+            </div>
+        </div>
 
         <div class="row">
           <div class="large-8 columns">
