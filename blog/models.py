@@ -4,7 +4,6 @@ from django import forms
 from django.forms import ModelForm
 from django.http import HttpResponse
 from django.utils import simplejson
-from collections import Counter, defaultdict
 import random, string
  
 # GENDER_CHOICES = (
