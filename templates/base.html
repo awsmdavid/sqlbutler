@@ -6,7 +6,7 @@
         <title>Essay Better</title>
         <link rel="stylesheet" href="{{STATIC_URL}}/../stylesheets/app.css" />
         <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
-        <script src="bower_components/modernizr/modernizr.js"></script>        
+        <script src="{{STATIC_URL}}/../bower_components/modernizr/modernizr.js"></script>        
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
     
         <!-- <link rel="icon" type="image/jpg" href="http://static.thoughtfulgiftgenerator.com/img/tgg.ico"> -->
@@ -20,8 +20,17 @@
         <meta content='http://www.essaybetter.com' property='og:url'>
         <!-- <meta content='http://static.essaybetter.com/img/tgg-mast2.png' property='og:image'> -->
         <meta content='Essay Up.' property='og:description'>
+        <script>
 
+        $(document).ready(function() {
+            $('#test').click(function(){
+                alert("yo");
+                //$('#background-image').removeClass();
+            });
+        });
+        </script>
     </head>
+
 
     <body>
         <a href="/">
@@ -55,8 +64,10 @@
             </div>
         </div>
 
-        <script src="bower_components/jquery/dist/jquery.min.js"></script>
-        <script src="bower_components/foundation/js/foundation.min.js"></script>
-        <script src="js/app.js"></script>
+        <script src="{{STATIC_URL}}/../bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="{{STATIC_URL}}/../bower_components/foundation/js/foundation.min.js"></script>
+        <script src="{{STATIC_URL}}/../js/app.js"></script>
+        <script src="{{STATIC_URL}}/index.js"></script>
+
     </body>
 </html> 

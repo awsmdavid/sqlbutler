@@ -9,10 +9,16 @@ import codecs
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.core.context_processors import csrf
+import urllib
 
 
 articles = ["a", "the", "an"]
 common_words = ["i", "you", "he", "she", "it", "they", "is", "and", "to", "we", "of", "that"]
+
+def lookup(word):
+    http_request = urllib.urlopen("http://www.dictionaryapi.com/api/v1/references/thesaurus/xml/"+word+"?key=849aa01b-8361-4b26-a618-8c42bfeb0f74")
+    return http_request.read()
+
 
 def index(request):
     return render(request, 'blog/index.html')
@@ -56,13 +62,15 @@ def results(request):
         top_words = words_and_count_array.most_common()[:number_of_results]
 
         # generate synonyms for word
+        yo = lookup("use")
         synonyms = "thing, that, it, yeah"
 
-        new_list = [[(n[0], n[1],synonyms)] for n in top_words]
+
+        new_list = [[(n[0], n[1],lookup(n[0]))] for n in top_words]
 
         essay_data = essayData(text=text, word_list = words, words_count = all_words_count)
         # top_word = word(word=top_word, count=count_of_top_word)
-        return render(request, 'blog/results.html', { 'search_results': essay_data, 'top_words': top_words, 'new_list':new_list})
+        return render(request, 'blog/results.html', { 'search_results': essay_data, 'top_words': top_words, 'new_list':new_list, 'yo':yo})
     return render(request, 'blog/index.html')
 
 

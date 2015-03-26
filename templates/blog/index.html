@@ -1,18 +1,27 @@
 {% extends 'base.html' %}
  
 {% block content1 %}
-    <h1>Enter Text</h1>
+    <h2>Enter Text</h2>
     <section class="input-form">
         <form action="/results/" method="POST">
             {% csrf_token %}
+
             <textarea name="text" rows="20" cols="60">{{ text }}</textarea>
             <br>
             <!-- <input id="textform" type="text" name="text"><br> -->
+            <div class="row">
+            <div class="panel">
+                Paste text in the box on the left and hit submit! 
+            </div>
             <input id="submit-button" class="secondary button" type="submit" value="Submit">
+
+
+            <div>
         </form>
     </section>
 {% endblock %}
 {% block content2 %}
+    <h2>FAQ</h2>
     <div class="panel">
       Where am I?
     </div>
@@ -27,8 +36,6 @@
         You've probably typed up an email, essay, or angry complaint to united airlines in the past few hours - this will help make your words more forceful!
     </div>
     <br>
-    <div class="panel">
-        Paste text in the box on the left and hit submit! 
-    </div>
+
 {% endblock %}
 
