@@ -13,7 +13,6 @@
         {{search_results.word_list}}<br>
         <h2>count of words minus articles</h2>
         {{search_results.words_count}}<br>
-        {{yo}}
 
         <br>
         
@@ -28,11 +27,23 @@
         <div class="panel">
             <span>[+]</span>
             <h3>{{ word.0.0 }}</h3>
-            - Count {{ word.0.1 }}
-            <div class="word-metadata"><span id="test">Alternate Suggestions:</span></div>
-            <div>Count {{ word.0.2 }} </div>
+            <h4>Used: </h4> {{ word.0.1 }} times
+
+            <div class="word-metadata">
+                <h4>Part of Speech:</h4>
+                <div>{{ word.0.2.0 }}</div>
+                <h4>Definition:</h4>
+                <div>{{ word.0.2.1 }}</div>
+                <h4>Synonyms:</h4>
+                <div>{{ word.0.2.2 }} </div>  
+            </div>          
         </div>
     {% endfor %}
-
+    <h2>
+        transition words
+    </h2>
+    <div class="panel">
+        statistics:      
+    </div>
 </div>    
 {% endblock %}

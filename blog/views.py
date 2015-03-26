@@ -9,16 +9,25 @@ import codecs
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.core.context_processors import csrf
+# for lookup
 import urllib
+import re
 
 
 articles = ["a", "the", "an"]
 common_words = ["i", "you", "he", "she", "it", "they", "is", "and", "to", "we", "of", "that"]
 
+
+#TODO: figure out if word is noun or verb
 def lookup(word):
     http_request = urllib.urlopen("http://www.dictionaryapi.com/api/v1/references/thesaurus/xml/"+word+"?key=849aa01b-8361-4b26-a618-8c42bfeb0f74")
-    return http_request.read()
-
+    xml = http_request.read()
+    #blindly take first entry, regardless of meaning
+    definition = re.split('<mc>|</mc>',xml)[1]
+    synonyms = re.split('<syn>|</syn>',xml)[1]
+    part_of_speech = re.split('<fl>|</fl>',xml)[1]
+    # loop to find all definitions
+    return [part_of_speech, definition, synonyms]  
 
 def index(request):
     return render(request, 'blog/index.html')
@@ -62,15 +71,11 @@ def results(request):
         top_words = words_and_count_array.most_common()[:number_of_results]
 
         # generate synonyms for word
-        yo = lookup("use")
-        synonyms = "thing, that, it, yeah"
-
-
         new_list = [[(n[0], n[1],lookup(n[0]))] for n in top_words]
 
         essay_data = essayData(text=text, word_list = words, words_count = all_words_count)
         # top_word = word(word=top_word, count=count_of_top_word)
-        return render(request, 'blog/results.html', { 'search_results': essay_data, 'top_words': top_words, 'new_list':new_list, 'yo':yo})
+        return render(request, 'blog/results.html', { 'search_results': essay_data, 'top_words': top_words, 'new_list':new_list})
     return render(request, 'blog/index.html')
 
 
