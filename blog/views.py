@@ -15,7 +15,7 @@ import re
 
 
 articles = ["a", "the", "an"]
-common_words = ["i", "you", "he", "she", "it", "they", "is", "and", "to", "we", "of", "that"]
+common_words = ["i", "you", "he", "she", "it", "they", "is", "and", "to", "we", "of", "that", "with", "in"]
 
 
 #TODO: figure out if word is noun or verb
@@ -23,11 +23,14 @@ def lookup(word):
     http_request = urllib.urlopen("http://www.dictionaryapi.com/api/v1/references/thesaurus/xml/"+word+"?key=849aa01b-8361-4b26-a618-8c42bfeb0f74")
     xml = http_request.read()
     #blindly take first entry, regardless of meaning
-    definition = re.split('<mc>|</mc>',xml)[1]
-    synonyms = re.split('<syn>|</syn>',xml)[1]
-    part_of_speech = re.split('<fl>|</fl>',xml)[1]
-    # loop to find all definitions
-    return [part_of_speech, definition, synonyms]  
+    try:
+        definition = re.split('<mc>|</mc>',xml)[1]
+        synonyms = re.split('<syn>|</syn>',xml)[1]
+        part_of_speech = re.split('<fl>|</fl>',xml)[1]
+        # loop to find all definitions
+        return [part_of_speech, definition, synonyms]
+    finally:    
+        return ["none", "none", "none"]
 
 def index(request):
     return render(request, 'blog/index.html')
