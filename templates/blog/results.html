@@ -28,12 +28,11 @@
     </h2>
     {% for word in synonyms_list %}
         <div class="panel">
-            <span>[+]</span>
+            <a class="toggle-expand">[+]</a>
             <div>
                 <h3>{{ word.0.0 }}</h3>
                 Used: {{ word.0.1 }} times
             </div>
-
             <div class="word-metadata">
                 <h4>Part of Speech:</h4>
                 <div>{{ word.0.2.0 }}</div>
