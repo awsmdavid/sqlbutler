@@ -14446,10 +14446,15 @@ def calcSynonyms(word_list, number):
 def results(request):
     if request.method == 'POST':        
         # cast request essay as string and store
-        text = request.POST.get('text')     
+        text = request.POST.get('text') 
 
         # convert from unicode to text /bytes - prevents crap out from bullets
-        text = text.encode('utf-8').strip()
+        try:
+            text = text.encode('utf-8').strip()
+        except:
+            # text = [w.replace(u'0xe2',u"'") for w in text]
+            text = text.encode('ascii')
+            text = text.encode('utf-8').strip()
 
         # strip punctuation
         words_without_punc = text.translate(string.maketrans("",""), string.punctuation)
@@ -14458,7 +14463,7 @@ def results(request):
         words = words_without_punc.split()
 
         # list comp to lower case for each word
-        all_words = [word.upper() for word in words]
+        all_words = [w.upper() for w in words]
         # count words and generate key value pair
         all_words_count = Counter(all_words)
         # remove articles and common words
@@ -14479,7 +14484,6 @@ def results(request):
         top_words = words_and_count_array.most_common()[:10]
 
         # convert from unicode to text /bytes - prevents crap out from bullets
-        text = text.encode('utf-8').strip()
         sentiment_score = 0
         sentiment_score = calcSentiment(text)
         sentiment_trend = calcSentimentTrend(text)
