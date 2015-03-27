@@ -14422,7 +14422,8 @@ def calcCertainty(text):
         return count/len(words)
 
 def calcStructure(text):
-    count = 0
+    count = 0.00
+    sentence_count = len(text.split('. '))
     words_without_punc = text.translate(string.maketrans("",""), string.punctuation)
     words = words_without_punc.split()
     if len(words)>0:
@@ -14431,9 +14432,7 @@ def calcStructure(text):
         for word in words:
             if word in STRUCTURAL_WORDS:
                 count += 1
-            else:
-                count += .5
-        return count/len(words)
+        return count/(len(text.split('. ')))
 
 def calcSynonyms(word_list, number):
 
@@ -14484,7 +14483,7 @@ def results(request):
         sentiment_score = 0
         sentiment_score = calcSentiment(text)
         sentiment_trend = calcSentimentTrend(text)
-        synonyms_list = calcSynonyms(words_and_count_array, 5)
+        synonyms_list = calcSynonyms(words_and_count_array, 3)
         certainty_score = calcCertainty(text)
         structural_score = calcStructure(text)
 
@@ -14509,24 +14508,3 @@ def countWords(list):
 
 def taketextandcount(text):
     return splitText(removePunc(text))
-
-
-
-#     #Collect All the words into a list
-# for line in response:
-#     #print "Line = " , line
-#     line_words = line.split()
-#     for word in line_words:  # looping each line and extracting words
-#         each_word.append(word)
-
-# #for every word collected, in dict same_words
-# #if a key exists, such that key == word then increment Mapping Value by 1
-# # Else add word as new key with mapped value as 1
-# for words in each_word:
-#     if words.lower() not in same_words.keys() :
-#         same_words[words.lower()]=1
-#     else:
-#         same_words[words.lower()]=same_words[words.lower()]+1
-
-# for each in same_words.keys():
-#     print "word = ",each, ", count = ",same_words[each]

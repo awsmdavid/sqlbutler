@@ -9,10 +9,13 @@
         <div class="panel">
             {{search_results.text}}
         </div>
-        <h2>list of words</h2>
+        <a href="">
+            want more data?
+        </a>
+<!--         <h2>list of words</h2>
         {{search_results.word_list}}<br>
         <h2>count of words minus articles</h2>
-        {{search_results.words_count}}<br>
+        {{search_results.words_count}}<br> -->
 
         <br>
         
@@ -26,8 +29,10 @@
     {% for word in synonyms_list %}
         <div class="panel">
             <span>[+]</span>
-            <h3>{{ word.0.0 }}</h3>
-            <h4>Used: </h4> {{ word.0.1 }} times
+            <div>
+                <h3>{{ word.0.0 }}</h3>
+                Used: {{ word.0.1 }} times
+            </div>
 
             <div class="word-metadata">
                 <h4>Part of Speech:</h4>

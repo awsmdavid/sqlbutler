@@ -24,6 +24,11 @@ HOME
   bottom: 0;
 }
 
+/* line 36, ../scss/_settings.scss */
+.word-metadata {
+  display: none;
+}
+
 /* line 348, ../bower_components/foundation/scss/foundation/components/_global.scss */
 meta.foundation-version {
   font-family: "/5.5.1/";
