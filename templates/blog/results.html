@@ -40,10 +40,18 @@
         </div>
     {% endfor %}
     <h2>
-        transition words
+        sentiment
     </h2>
     <div class="panel">
-        statistics:      
+        Average Sentiment<br>
+        {{sentiment_score}}   
+    </div>
+    <div class="panel">
+        Certainty Score  
+    </div>
+    <div class="panel">
+        Graph of Sentiment 
+        {{sentiment_trend}}   
     </div>
 </div>    
 {% endblock %}
