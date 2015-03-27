@@ -7,7 +7,7 @@
     <div>
         <h2>original text</h2>
         <div class="panel">
-            {{search_results.text}}
+            <span id="original-text">{{search_results.text}}</span>
         </div>
         <a href="">
             want more data?
@@ -29,10 +29,10 @@
     {% for word in synonyms_list %}
         <div class="panel">
             <a class="toggle-expand">[+]</a>
-            <div>
-                <h3>{{ word.0.0 }}</h3>
+            
+                <h3 class="word">{{ word.0.0 }}</h3>
                 Used: {{ word.0.1 }} times
-            </div>
+            
             <div class="word-metadata">
                 <h4>Part of Speech:</h4>
                 <div>{{ word.0.2.0 }}</div>

@@ -277,6 +277,7 @@ GENERIC_WORDS = ['A',
 'OF',
 'OFF',
 'OFTEN',
+'ON',
 'ONE',
 'ONLY',
 'ONTO',
@@ -13591,6 +13592,7 @@ POSITIVE_WORDS = [
 'ADVANTAGES',
 'ALLIANCE',
 'ALLIANCES',
+'AMAZING',
 'ASSURE',
 'ASSURED',
 'ASSURES',
@@ -13603,6 +13605,7 @@ POSITIVE_WORDS = [
 'ATTAINS',
 'ATTRACTIVE',
 'ATTRACTIVENESS',
+'AWESOME',
 'BEAUTIFUL',
 'BEAUTIFULLY',
 'BENEFICIAL',
@@ -13749,6 +13752,7 @@ POSITIVE_WORDS = [
 'HONORED',
 'HONORING',
 'HONORS',
+'HOPE',
 'IDEAL',
 'IMPRESS',
 'IMPRESSED',
@@ -13933,6 +13937,13 @@ POSITIVE_WORDS = [
 
 
 NEGATIVE_WORDS = [
+'WORST',
+'LAME',
+'SUCKS',
+'HORRIBLE',
+'STINKS',
+'BLOWS',
+'SCREWED',
 'AVERSELY',
 'CYBERATTACK',
 'CYBERATTACKS',
@@ -14014,7 +14025,8 @@ STRUCTURAL_WORDS = [
 'CONSEQUENTLY',
 'HENCE',
 'ULTIMATELY',
-'IN CLOSING'
+'IN CLOSING',
+'MOST OF ALL'
 ]
 
 # Supporting examples - for example, to illustrate, for instance, because, specifically
@@ -14031,6 +14043,7 @@ CERTAINTY_WORDS = [
 'UNDOUBTEDLY',
 'CERTAIN',
 'CERTAINTY',
+'CERTAINLY',
 'INDEED',
 'ASSUREDLY',
 'CLEARLY', 
@@ -14360,7 +14373,7 @@ UNCERTAINTY_WORDS = [
 'VOLATILITY'
 ]
 
-
+# USE NLTK http://www.nltk.org/book/ch01.html 
 
 
 
@@ -14428,7 +14441,6 @@ def calcStructure(text):
     words = words_without_punc.split()
     if len(words)>0:
         words = [word.upper() for word in words]
-        # positive = 1; negative = 0; neutral = .5
         for word in words:
             if word in STRUCTURAL_WORDS:
                 count += 1

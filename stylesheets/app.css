@@ -24,7 +24,12 @@ HOME
   bottom: 0;
 }
 
-/* line 36, ../scss/_settings.scss */
+/* line 35, ../scss/_settings.scss */
+.highlighted-text {
+  background: yellow;
+}
+
+/* line 39, ../scss/_settings.scss */
 .word-metadata {
   display: none;
 }
