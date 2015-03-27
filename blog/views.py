@@ -13976,9 +13976,81 @@ NEGATIVE_WORDS = [
 ]
 
 
+STRUCTURAL_WORDS = [
+'FOR EXAMPLE',
+'OF COURSE',
+'INDEED',
+'FOR EXAMPLE',
+'TO ILLUSTRATE',
+'FOR INSTANCE',
+'BECAUSE',
+'SPECIFICALLY',
+'FURTHERMORE',
+'IN ADDITION',
+'SIMILARLY',
+'JUST AS',
+'ALSO',
+'AS A RESULT',
+'MOREOVER',
+'SURELY',
+'TRULY',
+'UNDOUBTEDLY',
+'CLEARLY',
+'IN FACT',
+'ON THE CONTRARY',
+'YET',
+'DESPITE',
+'IN SPITE OF',
+'RATHER',
+'INSTEAD',
+'HOWEVER',
+'ALTHOUGH',
+'HENCEFORTH',
+'WHEREAS',
+'WHILE',
+'THEREFORE',
+'IN SUMMARY',
+'IN CONCLUSION',
+'CONSEQUENTLY',
+'HENCE',
+'ULTIMATELY',
+'IN CLOSING'
+]
+
+# Supporting examples - for example, to illustrate, for instance, because, specifically
+# Additional support - furthermore, in addition, similarly, just as, also, as a result, moreover
+# Importance - surely, truly, undoubtedly, clearly, in fact, most importantly
+# Contrast - on the contrary, yet, despite, rather, instead, however, although, while
+# Decide against - one cannot deny that, it could be argued that, granted, admittedly
+# Ying-yang - on the one hand/on the other hand
+# Concluding - therefore, in summary, consequently, hence, in conclusion, ultimately, in closing
 
 
-
+CERTAINTY_WORDS = [
+'SURELY',
+'UNDOUBTEDLY',
+'CERTAIN',
+'CERTAINTY',
+'INDEED',
+'ASSUREDLY',
+'CLEARLY', 
+'DEFINITELY', 
+'DOUBTLESS',
+'EASILY', 
+'HANDS DOWN',
+'INARGUABLY',
+'INCONTESTABLY',
+'INCONTROVERTIBLY', 
+'INDISPUTABLY', 
+'REALLY', 
+'PLAINLY', 
+'SO',
+'SURE', 
+'TRULY', 
+'UNARGUABLY',
+'UNDENIABLY',
+'UNQUESTIONABLY'
+]
 
 
 
@@ -14291,6 +14363,7 @@ UNCERTAINTY_WORDS = [
 
 
 
+
 #TODO: figure out if word is noun or verb
 def lookup(word):
     http_request = urllib.urlopen("http://www.dictionaryapi.com/api/v1/references/thesaurus/xml/"+word+"?key=849aa01b-8361-4b26-a618-8c42bfeb0f74")
@@ -14335,26 +14408,49 @@ def calcAverageSentiment(trend):
     return 0
 
 def calcCertainty(text):
-    words_without_punc = sentence.translate(string.maketrans("",""), string.punctuation)
+    count = 0
+    words_without_punc = text.translate(string.maketrans("",""), string.punctuation)
     words = words_without_punc.split()
     if len(words)>0:
         words = [word.upper() for word in words]
-        
+        # positive = 1; negative = 0; neutral = .5
+        for word in words:
+            if word in CERTAINTY_WORDS:
+                count += 1
+            elif word not in UNCERTAINTY_WORDS:
+                count += .5
+        return count/len(words)
 
+def calcStructure(text):
+    count = 0
+    words_without_punc = text.translate(string.maketrans("",""), string.punctuation)
+    words = words_without_punc.split()
+    if len(words)>0:
+        words = [word.upper() for word in words]
+        # positive = 1; negative = 0; neutral = .5
+        for word in words:
+            if word in STRUCTURAL_WORDS:
+                count += 1
+            else:
+                count += .5
+        return count/len(words)
 
-# def submit(request):
-#     return render(request, 'blog/results.html')
+def calcSynonyms(word_list, number):
+
+    # returns n most common elements in counter, converts counter to dict
+    # TODO: be smarter about number of results, ignore ones with count of 1, perhaps if they are not used consecutively
+    top_words = word_list.most_common()[:number]
+
+    # generate synonyms for word
+    return [[(n[0], n[1],lookup(n[0]))] for n in top_words]
 
 def results(request):
-    if request.method == 'POST':
+    if request.method == 'POST':        
         # cast request essay as string and store
         text = request.POST.get('text')     
 
         # convert from unicode to text /bytes - prevents crap out from bullets
         text = text.encode('utf-8').strip()
-        sentiment_score = 0
-        sentiment_score = calcSentiment(text)
-        sentiment_trend = calcSentimentTrend(text)
 
         # strip punctuation
         words_without_punc = text.translate(string.maketrans("",""), string.punctuation)
@@ -14364,9 +14460,9 @@ def results(request):
 
         # list comp to lower case for each word
         all_words = [word.upper() for word in words]
-
         # count words and generate key value pair
         all_words_count = Counter(all_words)
+        # remove articles and common words
 
         # remove articles and common words
         # TODO: remove other words?
@@ -14381,17 +14477,21 @@ def results(request):
 
         words_and_count_array = all_words_count
 
-        # returns n most common elements in counter, converts counter to dict
-        # TODO: be smarter about number of results, ignore ones with count of 1, perhaps if they are not used consecutively
-        number_of_results=5
-        top_words = words_and_count_array.most_common()[:number_of_results]
+        top_words = words_and_count_array.most_common()[:10]
 
-        # generate synonyms for word
-        new_list = [[(n[0], n[1],lookup(n[0]))] for n in top_words]
+        # convert from unicode to text /bytes - prevents crap out from bullets
+        text = text.encode('utf-8').strip()
+        sentiment_score = 0
+        sentiment_score = calcSentiment(text)
+        sentiment_trend = calcSentimentTrend(text)
+        synonyms_list = calcSynonyms(words_and_count_array, 5)
+        certainty_score = calcCertainty(text)
+        structural_score = calcStructure(text)
+
 
         essay_data = essayData(text=text, word_list = words, words_count = all_words_count)
         # top_word = word(word=top_word, count=count_of_top_word)
-        return render(request, 'blog/results.html', { 'search_results': essay_data, 'top_words': top_words, 'new_list':new_list, 'sentiment_score': sentiment_score, 'sentiment_trend': sentiment_trend})
+        return render(request, 'blog/results.html', { 'search_results': essay_data, 'top_words': top_words, 'synonyms_list':synonyms_list, 'sentiment_score': sentiment_score, 'sentiment_trend': sentiment_trend, 'certainty_score': certainty_score, 'structural_score': structural_score})
     return render(request, 'blog/index.html')
 
 

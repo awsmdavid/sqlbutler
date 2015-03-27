@@ -23,7 +23,7 @@
     <h2>
         oversused words
     </h2>
-    {% for word in new_list %}
+    {% for word in synonyms_list %}
         <div class="panel">
             <span>[+]</span>
             <h3>{{ word.0.0 }}</h3>
@@ -47,10 +47,15 @@
         {{sentiment_score}}   
     </div>
     <div class="panel">
-        Certainty Score  
+        Certainty Score<br>
+        {{certainty_score}}
     </div>
     <div class="panel">
-        Graph of Sentiment 
+        Structure Score<br>
+        {{structural_score}}
+    </div>
+    <div class="panel">
+        Graph of Sentiment<br>
         {{sentiment_trend}}   
     </div>
 </div>    
