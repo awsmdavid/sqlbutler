@@ -14458,11 +14458,12 @@ def calcSynonyms(word_list, number):
 def results(request):
     if request.method == 'POST':        
         # cast request essay as string and store
-        text = request.POST.get('text') 
+        original_text = request.POST.get('text')
 
+        # text = request.POST.get('text') 
         # convert from unicode to text /bytes - prevents crap out from bullets
         try:
-            text = text.encode('utf-8').strip()
+            text = original_text.encode('utf-8').strip()
         except:
             # text = [w.replace(u'0xe2',u"'") for w in text]
             text = text.encode('ascii')
@@ -14504,7 +14505,7 @@ def results(request):
         structural_score = calcStructure(text)
 
 
-        essay_data = essayData(text=text, word_list = words, words_count = all_words_count)
+        essay_data = essayData(original_text=original_text, text=text, word_list = words, words_count = all_words_count)
         # top_word = word(word=top_word, count=count_of_top_word)
         return render(request, 'blog/results.html', { 'search_results': essay_data, 'top_words': top_words, 'synonyms_list':synonyms_list, 'sentiment_score': sentiment_score, 'sentiment_trend': sentiment_trend, 'certainty_score': certainty_score, 'structural_score': structural_score})
     return render(request, 'blog/index.html')

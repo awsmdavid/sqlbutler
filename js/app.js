@@ -1,6 +1,7 @@
 // Foundation JavaScript
 // Documentation can be found at: http://foundation.zurb.com/docs
 $(document).foundation();
+// var orignal_text = $('#original-text').html();
 $('.toggle-expand').click(function(){
 	$(this).siblings(".word-metadata").toggle(200, function() {
 		word = $(this).siblings(".word").html();

@@ -2,34 +2,39 @@
 HOME
 **/
 /* line 12, ../scss/_settings.scss */
+.faq {
+  margin: 0 15px;
+}
+
+/* line 15, ../scss/_settings.scss */
 #submit-button {
   float: right;
 }
 
-/* line 20, ../scss/_settings.scss */
+/* line 23, ../scss/_settings.scss */
 .share-button {
   height: 30px;
   float: right;
   margin: 15px 5px;
 }
 
-/* line 26, ../scss/_settings.scss */
+/* line 29, ../scss/_settings.scss */
 .share-button:hover {
   opacity: .7;
 }
 
-/* line 30, ../scss/_settings.scss */
+/* line 33, ../scss/_settings.scss */
 #footer {
   text-align: right;
   bottom: 0;
 }
 
-/* line 35, ../scss/_settings.scss */
+/* line 38, ../scss/_settings.scss */
 .highlighted-text {
   background: yellow;
 }
 
-/* line 39, ../scss/_settings.scss */
+/* line 42, ../scss/_settings.scss */
 .word-metadata {
   display: none;
 }
