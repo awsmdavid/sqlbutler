@@ -1,4 +1,30 @@
 {% extends 'base.html' %}
+
+{% block script1 %}
+    <!--Load the AJAX API for google graphs-->
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Sentence', 'Sentiment Score'],
+            {% for sentence in sentiment_trend %}
+            [{{sentence}},  {{sentence}}],
+            {% endfor %}
+        ]);
+
+        var options = {
+          title: 'Company Performance',
+          hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
+          vAxis: {minValue: 0}
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+{% endblock %}
  
 {% block content1 %}
 <!--     <h1>
@@ -57,6 +83,7 @@
     <div class="panel">
         Graph of Sentiment<br>
         {{sentiment_trend}}   
+        <div id="chart_div"></div>
     </div>
     <h2>
         complexity
