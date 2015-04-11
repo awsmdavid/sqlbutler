@@ -10,17 +10,17 @@
         var data = google.visualization.arrayToDataTable([
             ['Sentence', 'Sentiment Score'],
             {% for sentence in sentiment_trend %}
-            [{{sentence}},  {{sentence}}],
+            [{{forloop.counter}},  {{sentence}}],
             {% endfor %}
         ]);
 
         var options = {
-          title: 'Company Performance',
-          hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
-          vAxis: {minValue: 0}
+          title: 'Sentiment Chart',
+          hAxis: {title: 'Sentence',  titleTextStyle: {color: '#333'}},
+          // vAxis: {minValue: .4}
         };
 
-        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+        var chart = new google.visualization.AreaChart(document.getElementById('sentiment_chart_div'));
         chart.draw(data, options);
       }
     </script>
@@ -83,7 +83,7 @@
     <div class="panel">
         Graph of Sentiment<br>
         {{sentiment_trend}}   
-        <div id="chart_div"></div>
+        <div id="sentiment_chart_div"></div>
     </div>
     <h2>
         complexity
