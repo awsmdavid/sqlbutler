@@ -27,6 +27,12 @@ class essayData(models.Model):
     top_words = models.CharField(max_length=255)
     top_words_count = models.CharField(max_length=255)
 
+class sentenceComplexityData(models.Model):
+    # essayId = models.IntegerField(default= lambda: random.randint(10000000,19999999))
+    avg_len = models.IntegerField()
+    complexity_variance = models.IntegerField()
+    max_length = models.IntegerField()
+    min_length = models.IntegerField()
     # class Meta:
     #     top_words_array = topWords
 

@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.db.models import Q
 from collections import defaultdict, OrderedDict
-from blog.models import essayData, word
+from blog.models import essayData, word, sentenceComplexityData
 import string
 import operator
 import codecs
@@ -17,6 +17,9 @@ import re
 from operator import itemgetter
 from heapq import nlargest
 from itertools import repeat, ifilter
+
+import math
+# import numpy as np
 
 class Counter(dict):
     def __init__(self, iterable=None, **kwds): 
@@ -14446,6 +14449,25 @@ def calcStructure(text):
                 count += 1
         return count/(len(text.split('. ')))
 
+def calcComplexityVariance(text):
+    sentence_array = text.split('.')
+    sentence_array.pop(len(sentence_array)-1)
+    sentence_length_array = [len(sentence.split()) for sentence in sentence_array]
+
+    for item in xrange(sentence_length_array.count(0)):
+        sentence_length_array.remove(0)
+
+    min_length = min(sentence_length_array)
+    max_length = max(sentence_length_array)
+
+    avg_len = (sum(sentence_length_array))/len(sentence_length_array)
+
+    # avg_len
+    text_std = math.sqrt(sum([pow((len(sentence.split())-avg_len),2) for sentence in sentence_array]))
+    # text_std = [(len(sentence)-avg_len) for sentence in sentence_array]
+
+    return [avg_len, text_std, max_length, min_length]
+
 def calcSynonyms(word_list, number):
 
     # returns n most common elements in counter, converts counter to dict
@@ -14504,10 +14526,17 @@ def results(request):
         certainty_score = calcCertainty(text)
         structural_score = calcStructure(text)
 
+        avg_len = calcComplexityVariance(text)[0]
+        complexity_variance = calcComplexityVariance(text)[1]
+        max_length = calcComplexityVariance(text)[2]
+        min_length = calcComplexityVariance(text)[3]
 
+        # [avg_len, text_std, max_length, min_length]
+
+        sentence_complexity_data = sentenceComplexityData(avg_len=avg_len, complexity_variance=complexity_variance, max_length=max_length, min_length=min_length)
         essay_data = essayData(original_text=original_text, text=text, word_list = words, words_count = all_words_count)
         # top_word = word(word=top_word, count=count_of_top_word)
-        return render(request, 'blog/results.html', { 'search_results': essay_data, 'top_words': top_words, 'synonyms_list':synonyms_list, 'sentiment_score': sentiment_score, 'sentiment_trend': sentiment_trend, 'certainty_score': certainty_score, 'structural_score': structural_score})
+        return render(request, 'blog/results.html', { 'search_results': essay_data, 'sentence_complexity': sentence_complexity_data, 'top_words': top_words, 'synonyms_list':synonyms_list, 'sentiment_score': sentiment_score, 'sentiment_trend': sentiment_trend, 'certainty_score': certainty_score, 'structural_score': structural_score})
     return render(request, 'blog/index.html')
 
 

@@ -55,12 +55,25 @@
         {{certainty_score}}
     </div>
     <div class="panel">
-        Structure Score<br>
-        {{structural_score}}
-    </div>
-    <div class="panel">
         Graph of Sentiment<br>
         {{sentiment_trend}}   
+    </div>
+    <h2>
+        complexity
+    </h2>
+    <div class="panel">
+        Complexity<br>
+        {{sentence_complexity.complexity_variance}}<br>
+        Average Sentence Length<br>
+        {{sentence_complexity.avg_len}}<br>
+        Min Length<br>
+        {{sentence_complexity.min_length}}<br>
+        Max Length<br>
+        {{sentence_complexity.max_length}}<br>
+    </div>
+    <div class="panel">
+        Structure Score<br>
+        {{structural_score}}
     </div>
 </div>    
 {% endblock %}
