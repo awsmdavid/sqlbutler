@@ -155,8 +155,8 @@
     <div class="panel">
         diction chart
         <div id="diction_chart_div"></div>
-        <a class="toggle-word-usage-metadata" id="word-usage-toggle-expand">[+] click for more</a>
-        <div class="word-usage-metadata">
+        <a class="toggle-section-metadata">[+] click for more</a>
+        <div class="section-metadata">
             {% for word in synonyms_list %}
                 <div class="panel">
                     <a class="toggle-expand">[+]</a>
@@ -182,14 +182,17 @@
     <div class="panel">
         Graph of Complexity
         <div id="complexity_chart_div"></div>
-        Complexity Variance<br>
-        {{sentence_complexity.complexity_variance}}<br>
-        Average Sentence Length<br>
-        {{sentence_complexity.avg_len}}<br>
-        Min Length<br>
-        {{sentence_complexity.min_length}}<br>
-        Max Length<br>
-        {{sentence_complexity.max_length}}<br>
+        <a class="toggle-section-metadata">[+] click for more</a>
+        <div class="section-metadata">
+            Complexity Variance<br>
+            {{sentence_complexity.complexity_variance}}<br>
+            Average Sentence Length<br>
+            {{sentence_complexity.avg_len}}<br>
+            Min Length<br>
+            {{sentence_complexity.min_length}}<br>
+            Max Length<br>
+            {{sentence_complexity.max_length}}<br>
+        </div>
     </div>
 
     <h2>

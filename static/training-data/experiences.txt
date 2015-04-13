@@ -1,3 +1,15 @@
+Complexity Variance
+105.470374987
+Average Sentence Length
+18
+Min Length
+2
+Max Length
+62
+
+Structure Score
+0.396825396825
+
 Forty-seven percent of the time, the average mind is wandering. It wanders about a third of the time while a person is reading, talking with other people, or taking care of children. It wanders 10 percent of the time, even, during sex. And that wandering, according to psychologist Matthew Killingsworth, is not good for well-being. A mind belongs in one place. During his training at Harvard, Killingsworth compiled those numbers and built a scientific case for every cliché about living in the moment. In a 2010 Science paper co-authored with psychology professor Daniel Gilbert, the two wrote that "a wandering mind is an unhappy mind."
 
 For Killingsworth, happiness is in the content of moment-to-moment experiences. Nothing material is intrinsically valuable, except in whatever promise of happiness it carries. Satisfaction in owning a thing does not have to come during the moment it's acquired, of course. It can come as anticipation or nostalgic longing. Overall, though, the achievement of the human brain to contemplate events past and future at great, tedious length has, these psychologists believe, come at the expense of happiness. Minds tend to wander to dark, not whimsical, places. Unless that mind has something exciting to anticipate or sweet to remember.

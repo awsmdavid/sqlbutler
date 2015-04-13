@@ -26,13 +26,14 @@ $('.toggle-expand').click(function(){
 	});
 });
 
-$('.toggle-word-usage-metadata').click(function(){
-	$(this).siblings(".word-usage-metadata").toggle(200, function(){
-		if ($("#word-usage-toggle-expand").html() == "[+] click for more"){
-			$("#word-usage-toggle-expand").html("[-] click for less");
+$('.toggle-section-metadata').click(function(){
+	$(this).siblings(".section-metadata").toggle(200, function(){
+		// alert("yo")
+		if ($(".toggle-section-metadata").html() == "[+] click for more"){
+			$(".toggle-section-metadata").html("[-] click for less");
 		}
 		else{
-			$("#word-usage-toggle-expand").html("[+] click for more");
+			$(".toggle-section-metadata").html("[+] click for more");
 		}
 	});
 });
