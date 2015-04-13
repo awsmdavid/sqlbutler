@@ -6,10 +6,13 @@ from django.http import HttpResponse
 from django.utils import simplejson
 import random, string
  
-# GENDER_CHOICES = (
-#     ('Male', 'Male'),
-#     ('Female', 'Female'),
-# )
+GRADE = (
+    ('Incredible', 'Incredible'),
+    ('Great', 'Great'),
+    ('Good', 'Good'),
+    ('Average', 'Average'),
+    ('Poor', 'Poor'),
+)
 
 class word(models.Model):
     word = models.CharField(max_length=255)
@@ -33,6 +36,7 @@ class sentenceComplexityData(models.Model):
     complexity_variance = models.IntegerField()
     max_length = models.IntegerField()
     min_length = models.IntegerField()
+    complexity_grade = models.CharField(max_length=10, choices=GRADE)
     # class Meta:
     #     top_words_array = topWords
 

@@ -29,11 +29,11 @@ $('.toggle-expand').click(function(){
 $('.toggle-section-metadata').click(function(){
 	$(this).siblings(".section-metadata").toggle(200, function(){
 		// alert("yo")
-		if ($(".toggle-section-metadata").html() == "[+] click for more"){
-			$(".toggle-section-metadata").html("[-] click for less");
+		if ($(this).siblings(".toggle-section-metadata").html() == "[+] click for more"){
+			$(this).siblings(".toggle-section-metadata").html("[-] click for less");
 		}
 		else{
-			$(".toggle-section-metadata").html("[+] click for more");
+			$(this).siblings(".toggle-section-metadata").html("[+] click for more");
 		}
 	});
 });

@@ -13990,6 +13990,7 @@ STRUCTURAL_WORDS = [
 'FIRST',
 'SECOND',
 'THIRD',
+'THRIDLY',
 'FINALLY',
 'LASTLY',
 'AS',
@@ -14031,7 +14032,35 @@ STRUCTURAL_WORDS = [
 'HENCE',
 'ULTIMATELY',
 'IN CLOSING',
-'MOST OF ALL'
+'MOST OF ALL',
+'INDEED',
+'TOO',
+'FURTHER',
+'OR',
+'NOR',
+'NEITHER',
+'ALTERNATIVELY',
+'ESPECIALLY',
+'PARTICULARLY',
+'NOTABLY',
+'INCLUDING',
+'CONSIDERING',
+'REGARDING',
+'EQUALLY',
+'LIKEWISE',
+'BESIDES',
+'STILL',
+'YET',
+'INASMUCH',
+'OTHERWISE',
+'INITIALLY',
+'CONCLUDE',
+'EVENTUALLY',
+'INCIDENTALLY',
+'SUMMARY',
+'SUMMARIZE',
+'OVERALL',
+'HENCE'
 ]
 
 # Supporting examples - for example, to illustrate, for instance, because, specifically
@@ -14472,6 +14501,18 @@ def calcComplexityVariance(text):
 
     return [avg_len, text_std, max_length, min_length, sentence_length_array]
 
+def calcComplexityGrade(score):
+    if score>60:
+        return "Incredible"
+    elif score>40:
+        return "Great"
+    elif score>30:
+        return "Good"
+    elif score>20:
+        return "Average"
+    else:
+        return "Poor"
+
 def calcSynonyms(word_list, number):
 
     # returns n most common elements in counter, converts counter to dict
@@ -14480,6 +14521,12 @@ def calcSynonyms(word_list, number):
 
     # generate synonyms for word
     return [[(n[0], n[1],lookup(n[0]))] for n in top_words]
+
+
+
+####################
+# Begin controller #
+####################
 
 def results(request):
     if request.method == 'POST':        
@@ -14548,10 +14595,11 @@ def results(request):
         max_length = complexityResults[2]
         min_length = complexityResults[3]
         sentence_length_array = complexityResults[4]
+        complexity_grade = calcComplexityGrade(complexity_variance)
 
         # [avg_len, text_std, max_length, min_length]
 
-        sentence_complexity_data = sentenceComplexityData(avg_len=avg_len, complexity_variance=complexity_variance, max_length=max_length, min_length=min_length)
+        sentence_complexity_data = sentenceComplexityData(complexity_grade=complexity_grade, avg_len=avg_len, complexity_variance=complexity_variance, max_length=max_length, min_length=min_length)
         essay_data = essayData(paragraph_text = paragraphs, text=text, word_list = words, words_count = all_words_count)
         # top_word = word(word=top_word, count=count_of_top_word)
         return render(request, 'blog/results.html', { 'search_results': essay_data, 'sentence_complexity': sentence_complexity_data, 'top_words': top_words, 'synonyms_list':synonyms_list, 'sentiment_score': sentiment_score, 'sentiment_trend': sentiment_trend, 'certainty_score': certainty_score, 'overall_structural_score': overall_structural_score, 'structural_trend': structural_trend, 'sentence_length_array': sentence_length_array, 'paragraphs': paragraphs})
@@ -14567,6 +14615,10 @@ def results(request):
 # 3
 # Max Length
 # 47
+
+
+
+
 
 
 def splitText(text):

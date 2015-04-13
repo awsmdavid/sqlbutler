@@ -177,21 +177,24 @@
         </div>
     </div>
     <h2>
-        complexity
+        sentence variety
     </h2>
     <div class="panel">
-        Graph of Complexity
+        Graph of Setence Complexity
         <div id="complexity_chart_div"></div>
         <a class="toggle-section-metadata">[+] click for more</a>
         <div class="section-metadata">
+            Complexity Grade<br>
+            {{sentence_complexity.complexity_grade}}<br>
             Complexity Variance<br>
             {{sentence_complexity.complexity_variance}}<br>
+            {{sentence_complexity.}}
             Average Sentence Length<br>
             {{sentence_complexity.avg_len}}<br>
-            Min Length<br>
-            {{sentence_complexity.min_length}}<br>
             Max Length<br>
             {{sentence_complexity.max_length}}<br>
+            Min Length<br>
+            {{sentence_complexity.min_length}}<br>
         </div>
     </div>
 
@@ -201,7 +204,7 @@
     <div class="panel">
         Graph of Structure<br>
         <div id="structural_chart_div"></div>
-        Structure Score<br>
+        Structural Score<br>
         {{overall_structural_score}}
     </div>
 
