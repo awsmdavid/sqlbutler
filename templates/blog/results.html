@@ -77,14 +77,14 @@
         /*
         **structural chart
         */
-        var data = google.visualization.arrayToDataTable([
+        var structural_data = google.visualization.arrayToDataTable([
             ['Paragraph', 'Structural Score'],
             {% for score in structural_trend %}
             [{{forloop.counter}},  {{score}}],
             {% endfor %}
         ]);
 
-        var options = {
+        var structural_options = {
             vAxis: {title: "Structural Score"},
             hAxis: {title: "Paragraph"},
             seriesType: "bars",
@@ -94,8 +94,21 @@
 
         };
 
-        var chart = new google.visualization.ComboChart(document.getElementById('structural_chart_div'));
-        chart.draw(data, options);
+        var structural_chart = new google.visualization.ComboChart(document.getElementById('structural_chart_div'));
+        structural_chart.draw(structural_data, structural_options);
+
+        /*
+        **event handlers
+        */
+        // Every time the table fires the "select" event, it should call your
+        // selectHandler() function.
+        google.visualization.events.addListener(structural_chart, 'select', selectHandler);
+
+        function selectHandler(e) {
+            // highlightParagraph(structural_chart.getSelection()[0].row+1));
+            id = ((structural_chart.getSelection()[0].row)*2)+1;
+            $('#paragraph'+id).addClass("highlighted-paragraph");
+        }
 
       }
     </script>
@@ -109,8 +122,10 @@
         <h2>original text</h2>
         <div class="panel">
             <span id="original-text">
-                {% for p in paragraphs %} 
-                {{p}}
+                {% for p in paragraphs %}
+                <span id="paragraph{{forloop.counter}}" class="toggle-paragraph">
+                    {{p}}
+                </span>
                 <br>
                 {%endfor%}
             </span>

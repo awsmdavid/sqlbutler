@@ -25,3 +25,8 @@ $('.toggle-expand').click(function(){
 		}
 	});
 });
+
+function highlightParagraph(id){
+	alert('yo yo yo');
+	// $('#paragraph'+id).addClass("highlighted-text");
+}

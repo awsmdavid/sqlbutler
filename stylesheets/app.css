@@ -35,6 +35,11 @@ HOME
 }
 
 /* line 42, ../scss/_settings.scss */
+.highlighted-paragraph {
+  background: #99CCFF;
+}
+
+/* line 46, ../scss/_settings.scss */
 .word-metadata {
   display: none;
 }
