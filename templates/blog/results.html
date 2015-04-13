@@ -2,26 +2,52 @@
 
 {% block script1 %}
     <!--Load the AJAX API for google graphs-->
-        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
-        var data = google.visualization.arrayToDataTable([
+        var sentiment_data = google.visualization.arrayToDataTable([
             ['Sentence', 'Sentiment Score'],
             {% for sentence in sentiment_trend %}
             [{{forloop.counter}},  {{sentence}}],
             {% endfor %}
         ]);
 
-        var options = {
-          title: 'Sentiment Chart',
+        var sentiment_options = {
+          // title: 'Sentiment Chart',
           hAxis: {title: 'Sentence',  titleTextStyle: {color: '#333'}},
           // vAxis: {minValue: .4}
+          legend: {position: 'none'},
+          // backgroundColor: {'#d8d8d8'},
+          backgroundColor: {fill:'#f2f2f2'},
+          chartArea:{width:'100%'}
         };
 
-        var chart = new google.visualization.AreaChart(document.getElementById('sentiment_chart_div'));
-        chart.draw(data, options);
+        var sentiment_chart = new google.visualization.AreaChart(document.getElementById('sentiment_chart_div'));
+        sentiment_chart.draw(sentiment_data, sentiment_options);
+
+        //complexity chart
+        var complexity_data = google.visualization.arrayToDataTable([
+            ['Sentence', 'Complexity'],
+            {% for count in sentence_length_array %}
+            [{{forloop.counter}},  {{count}}],
+            {% endfor %}
+        ]);
+
+        var complexity_options = {
+          // title: 'Sentiment Chart',
+          hAxis: {title: 'Sentence',  titleTextStyle: {color: '#333'}},
+          // vAxis: {minValue: .4}
+          legend: {position: 'none'},
+          // backgroundColor: {'#d8d8d8'},
+          backgroundColor: {fill:'#f2f2f2'},
+          chartArea:{width:'100%'}
+        };
+
+        var complexity_chart = new google.visualization.AreaChart(document.getElementById('complexity_chart_div'));
+        complexity_chart.draw(complexity_data, complexity_options);
+
       }
     </script>
 {% endblock %}
@@ -73,23 +99,23 @@
         sentiment
     </h2>
     <div class="panel">
+        Graph of Sentiment<br>
+        <!-- {{sentiment_trend}} -->
+        <div id="sentiment_chart_div"></div>
         Average Sentiment<br>
-        {{sentiment_score}}   
+        {{sentiment_score}}
     </div>
     <div class="panel">
         Certainty Score<br>
         {{certainty_score}}
     </div>
-    <div class="panel">
-        Graph of Sentiment<br>
-        {{sentiment_trend}}   
-        <div id="sentiment_chart_div"></div>
-    </div>
     <h2>
         complexity
     </h2>
     <div class="panel">
-        Complexity<br>
+        Graph of Complexity
+        <div id="complexity_chart_div"></div>
+        Complexity Variance<br>
         {{sentence_complexity.complexity_variance}}<br>
         Average Sentence Length<br>
         {{sentence_complexity.avg_len}}<br>

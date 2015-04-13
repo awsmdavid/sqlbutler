@@ -1,14 +1,9 @@
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect
+from django.shortcuts import render 
 from django.db.models import Q
-from collections import defaultdict, OrderedDict
-from blog.models import essayData, word, sentenceComplexityData
+from blog.models import essayData, sentenceComplexityData
 import string
-import operator
-import codecs
-from django.http import HttpResponse
-from django.shortcuts import render_to_response
-from django.core.context_processors import csrf
+# from django.shortcuts import render_to_response
+# from django.core.context_processors import csrf
 # for lookup
 import urllib
 import re
@@ -13991,6 +13986,12 @@ NEGATIVE_WORDS = [
 
 
 STRUCTURAL_WORDS = [
+'FIRST',
+'SECOND',
+'THIRD',
+'FINALLY',
+'LASTLY',
+'AS',
 'FOR EXAMPLE',
 'OF COURSE',
 'INDEED',
@@ -14439,7 +14440,6 @@ def calcCertainty(text):
 
 def calcStructure(text):
     count = 0.00
-    sentence_count = len(text.split('. '))
     words_without_punc = text.translate(string.maketrans("",""), string.punctuation)
     words = words_without_punc.split()
     if len(words)>0:
@@ -14466,7 +14466,7 @@ def calcComplexityVariance(text):
     text_std = math.sqrt(sum([pow((len(sentence.split())-avg_len),2) for sentence in sentence_array]))
     # text_std = [(len(sentence)-avg_len) for sentence in sentence_array]
 
-    return [avg_len, text_std, max_length, min_length]
+    return [avg_len, text_std, max_length, min_length, sentence_length_array]
 
 def calcSynonyms(word_list, number):
 
@@ -14526,20 +14526,31 @@ def results(request):
         certainty_score = calcCertainty(text)
         structural_score = calcStructure(text)
 
-        avg_len = calcComplexityVariance(text)[0]
-        complexity_variance = calcComplexityVariance(text)[1]
-        max_length = calcComplexityVariance(text)[2]
-        min_length = calcComplexityVariance(text)[3]
+        complexityResults = calcComplexityVariance(text)
+        avg_len = complexityResults[0]
+        complexity_variance = complexityResults[1]
+        max_length = complexityResults[2]
+        min_length = complexityResults[3]
+        sentence_length_array = complexityResults[4]
 
         # [avg_len, text_std, max_length, min_length]
 
         sentence_complexity_data = sentenceComplexityData(avg_len=avg_len, complexity_variance=complexity_variance, max_length=max_length, min_length=min_length)
         essay_data = essayData(original_text=original_text, text=text, word_list = words, words_count = all_words_count)
         # top_word = word(word=top_word, count=count_of_top_word)
-        return render(request, 'blog/results.html', { 'search_results': essay_data, 'sentence_complexity': sentence_complexity_data, 'top_words': top_words, 'synonyms_list':synonyms_list, 'sentiment_score': sentiment_score, 'sentiment_trend': sentiment_trend, 'certainty_score': certainty_score, 'structural_score': structural_score})
+        return render(request, 'blog/results.html', { 'search_results': essay_data, 'sentence_complexity': sentence_complexity_data, 'top_words': top_words, 'synonyms_list':synonyms_list, 'sentiment_score': sentiment_score, 'sentiment_trend': sentiment_trend, 'certainty_score': certainty_score, 'structural_score': structural_score, 'sentence_length_array': sentence_length_array})
     return render(request, 'blog/index.html')
 
 
+# great essay scores:
+# Complexity Variance
+# 68.3081254318
+# Average Sentence Length
+# 19
+# Min Length
+# 3
+# Max Length
+# 47
 
 
 def splitText(text):
