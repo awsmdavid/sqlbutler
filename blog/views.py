@@ -7,6 +7,7 @@ import string
 # for lookup
 import urllib
 import re
+# import nltk
 
 #for counter
 from operator import itemgetter
@@ -14440,8 +14441,11 @@ def calcCertainty(text):
 
 def calcStructure(text):
     count = 0.00
-    words_without_punc = text.translate(string.maketrans("",""), string.punctuation)
-    words = words_without_punc.split()
+    try:
+        words_without_punc = text.translate(string.maketrans("",""), string.punctuation)
+        words = words_without_punc.split()
+    except:
+        words = text.split()
     if len(words)>0:
         words = [word.upper() for word in words]
         for word in words:
@@ -14531,8 +14535,12 @@ def results(request):
         synonyms_list = calcSynonyms(words_and_count_array, 3)
         certainty_score = calcCertainty(text)
         overall_structural_score = calcStructure(text)
-        structural_trend = ["yo", "yo"]
-        # [calcStructure(p) for p in paragraphs]
+        # structural_trend = ["yo", "yo"]
+        trimmed_paragraphs = paragraphs 
+        structural_trend = [calcStructure(p) for p in trimmed_paragraphs]
+        structural_trend = [p for p in structural_trend if p is not None]
+
+        # structural_trend = nltk.pos_tag(text)
 
         complexityResults = calcComplexityVariance(text)
         avg_len = complexityResults[0]

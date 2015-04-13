@@ -78,12 +78,10 @@
         **structural chart
         */
         var data = google.visualization.arrayToDataTable([
-            ['Month', 'Bolivia'],
-            ['1',  165],
-            ['2',  135],
-            ['3',  157],
-            ['4',  139],
-            ['5',  136]
+            ['Paragraph', 'Structural Score'],
+            {% for score in structural_trend %}
+            [{{forloop.counter}},  {{score}}],
+            {% endfor %}
         ]);
 
         var options = {
