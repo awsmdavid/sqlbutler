@@ -40,6 +40,11 @@ HOME
 }
 
 /* line 46, ../scss/_settings.scss */
+.word-usage-metadata {
+  display: none;
+}
+
+/* line 50, ../scss/_settings.scss */
 .word-metadata {
   display: none;
 }

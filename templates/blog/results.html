@@ -102,13 +102,18 @@
         */
         // Every time the table fires the "select" event, it should call your
         // selectHandler() function.
-        google.visualization.events.addListener(structural_chart, 'select', selectHandler);
+        google.visualization.events.addListener(structural_chart, 'select', highlightParagraph);
+        google.visualization.events.addListener(structural_chart, 'onmouseover', unhighlightParagraph);        
 
-        function selectHandler(e) {
-            // highlightParagraph(structural_chart.getSelection()[0].row+1));
+        function highlightParagraph(e) {
             id = ((structural_chart.getSelection()[0].row)*2)+1;
+            $('.toggle-paragraph').removeClass('highlighted-paragraph');
             $('#paragraph'+id).addClass("highlighted-paragraph");
         }
+
+        function unhighlightParagraph(e) {
+            $('.toggle-paragraph').removeClass('highlighted-paragraph');
+        }       
 
       }
     </script>
@@ -150,27 +155,27 @@
     <div class="panel">
         diction chart
         <div id="diction_chart_div"></div>
-
-
-    {% for word in synonyms_list %}
-        <div class="panel">
-            <a class="toggle-expand">[+]</a>
-            
-                <h3 class="word">{{ word.0.0 }}</h3>
-                Used: {{ word.0.1 }} times
-            
-            <div class="word-metadata">
-                <h4>Part of Speech:</h4>
-                <div>{{ word.0.2.0 }}</div>
-                <h4>Definition:</h4>
-                <div>{{ word.0.2.1 }}</div>
-                <h4>Synonyms:</h4>
-                <div>{{ word.0.2.2 }} </div>  
-            </div>          
+        <a class="toggle-word-usage-metadata" id="word-usage-toggle-expand">[+] click for more</a>
+        <div class="word-usage-metadata">
+            {% for word in synonyms_list %}
+                <div class="panel">
+                    <a class="toggle-expand">[+]</a>
+                    
+                    <h3 class="word">{{ word.0.0 }}</h3>
+                        Used: {{ word.0.1 }} times
+                    
+                    <div class="word-metadata">
+                        <h4>Part of Speech:</h4>
+                        <div>{{ word.0.2.0 }}</div>
+                        <h4>Definition:</h4>
+                        <div>{{ word.0.2.1 }}</div>
+                        <h4>Synonyms:</h4>
+                        <div>{{ word.0.2.2 }} </div>  
+                    </div>          
+                </div>
+            {% endfor %}
         </div>
-    {% endfor %}
     </div>
-
     <h2>
         complexity
     </h2>
