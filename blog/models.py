@@ -21,7 +21,7 @@ class word(models.Model):
 class essayData(models.Model):
     # essayId = models.IntegerField(default= lambda: random.randint(10000000,19999999))
     text = models.CharField(max_length=255555)
-    original_text = models.CharField(max_length=255555)    
+    paragraph_text = models.CharField(max_length=255555)    
     word_list = models.CharField(max_length=255)  
     words_count = models.CharField(max_length=255)
     top_words = models.CharField(max_length=255)

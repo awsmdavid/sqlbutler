@@ -59,7 +59,12 @@
     <div>
         <h2>original text</h2>
         <div class="panel">
-            <span id="original-text">{{search_results.original_text}}</span>
+            <span id="original-text">
+                {% for p in paragraphs %} 
+                {{p}}
+                <br>
+                {%endfor%}
+            </span>
         </div>
         <a href="">
             want more data?
@@ -128,5 +133,6 @@
         Structure Score<br>
         {{structural_score}}
     </div>
+
 </div>    
 {% endblock %}

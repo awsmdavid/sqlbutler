@@ -14480,15 +14480,21 @@ def calcSynonyms(word_list, number):
 def results(request):
     if request.method == 'POST':        
         # cast request essay as string and store
-        original_text = request.POST.get('text')
-
+        raw_text = request.POST.get('text')
         # text = request.POST.get('text') 
         # convert from unicode to text /bytes - prevents crap out from bullets
         try:
-            text = original_text.encode('utf-8').strip()
+            paragraphs = re.split(r"\r\n", raw_text)
+            # paragraphs = [paragraph.encode('utf-8').strip() for paragraph in paragraphs]
+            text = raw_text.encode('utf-8').strip()
         except:
-            # text = [w.replace(u'0xe2',u"'") for w in text]
-            text = text.encode('ascii')
+            paragraphs = re.split(r"\r\n", raw_text)
+            # paragraphs = [w.replace(u'\xe2\x80\x99',u"'") for w in text]
+            # parapgraphs = [w.replace(u'0xe2',u"'") for w in text]
+            # paragraphs = [w.replace(u'\xe2',u" ") for w in paragraphs]
+            # paragraphs = [paragraph.encode('ascii') for paragraph in paragraphs]
+            # paragraphs = [paragraph.encode('utf-8').strip() for paragraph in paragraphs]
+            text = raw_text.encode('ascii')
             text = text.encode('utf-8').strip()
 
         # strip punctuation
@@ -14536,9 +14542,9 @@ def results(request):
         # [avg_len, text_std, max_length, min_length]
 
         sentence_complexity_data = sentenceComplexityData(avg_len=avg_len, complexity_variance=complexity_variance, max_length=max_length, min_length=min_length)
-        essay_data = essayData(original_text=original_text, text=text, word_list = words, words_count = all_words_count)
+        essay_data = essayData(paragraph_text = paragraphs, text=text, word_list = words, words_count = all_words_count)
         # top_word = word(word=top_word, count=count_of_top_word)
-        return render(request, 'blog/results.html', { 'search_results': essay_data, 'sentence_complexity': sentence_complexity_data, 'top_words': top_words, 'synonyms_list':synonyms_list, 'sentiment_score': sentiment_score, 'sentiment_trend': sentiment_trend, 'certainty_score': certainty_score, 'structural_score': structural_score, 'sentence_length_array': sentence_length_array})
+        return render(request, 'blog/results.html', { 'search_results': essay_data, 'sentence_complexity': sentence_complexity_data, 'top_words': top_words, 'synonyms_list':synonyms_list, 'sentiment_score': sentiment_score, 'sentiment_trend': sentiment_trend, 'certainty_score': certainty_score, 'structural_score': structural_score, 'sentence_length_array': sentence_length_array, 'paragraphs': paragraphs})
     return render(request, 'blog/index.html')
 
 
