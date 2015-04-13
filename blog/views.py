@@ -14530,7 +14530,9 @@ def results(request):
         sentiment_trend = calcSentimentTrend(text)
         synonyms_list = calcSynonyms(words_and_count_array, 3)
         certainty_score = calcCertainty(text)
-        structural_score = calcStructure(text)
+        overall_structural_score = calcStructure(text)
+        structural_trend = ["yo", "yo"]
+        # [calcStructure(p) for p in paragraphs]
 
         complexityResults = calcComplexityVariance(text)
         avg_len = complexityResults[0]
@@ -14544,7 +14546,7 @@ def results(request):
         sentence_complexity_data = sentenceComplexityData(avg_len=avg_len, complexity_variance=complexity_variance, max_length=max_length, min_length=min_length)
         essay_data = essayData(paragraph_text = paragraphs, text=text, word_list = words, words_count = all_words_count)
         # top_word = word(word=top_word, count=count_of_top_word)
-        return render(request, 'blog/results.html', { 'search_results': essay_data, 'sentence_complexity': sentence_complexity_data, 'top_words': top_words, 'synonyms_list':synonyms_list, 'sentiment_score': sentiment_score, 'sentiment_trend': sentiment_trend, 'certainty_score': certainty_score, 'structural_score': structural_score, 'sentence_length_array': sentence_length_array, 'paragraphs': paragraphs})
+        return render(request, 'blog/results.html', { 'search_results': essay_data, 'sentence_complexity': sentence_complexity_data, 'top_words': top_words, 'synonyms_list':synonyms_list, 'sentiment_score': sentiment_score, 'sentiment_trend': sentiment_trend, 'certainty_score': certainty_score, 'overall_structural_score': overall_structural_score, 'structural_trend': structural_trend, 'sentence_length_array': sentence_length_array, 'paragraphs': paragraphs})
     return render(request, 'blog/index.html')
 
 

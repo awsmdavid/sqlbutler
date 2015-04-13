@@ -7,6 +7,10 @@
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
+
+        /*
+        **sentiment chart
+        */
         var sentiment_data = google.visualization.arrayToDataTable([
             ['Sentence', 'Sentiment Score'],
             {% for sentence in sentiment_trend %}
@@ -15,19 +19,21 @@
         ]);
 
         var sentiment_options = {
-          // title: 'Sentiment Chart',
-          hAxis: {title: 'Sentence',  titleTextStyle: {color: '#333'}},
-          // vAxis: {minValue: .4}
-          legend: {position: 'none'},
-          // backgroundColor: {'#d8d8d8'},
-          backgroundColor: {fill:'#f2f2f2'},
-          chartArea:{width:'100%'}
+            // title: 'Sentiment Chart',
+            hAxis: {title: 'Sentence',  titleTextStyle: {color: '#333'}},
+            // vAxis: {minValue: .4}
+            legend: {position: 'none'},
+            // backgroundColor: {'#d8d8d8'},
+            backgroundColor: {fill:'#f2f2f2'},
+            chartArea:{width:'100%'}
         };
 
         var sentiment_chart = new google.visualization.AreaChart(document.getElementById('sentiment_chart_div'));
         sentiment_chart.draw(sentiment_data, sentiment_options);
 
-        //complexity chart
+        /*
+        **complexity chart
+        */
         var complexity_data = google.visualization.arrayToDataTable([
             ['Sentence', 'Complexity'],
             {% for count in sentence_length_array %}
@@ -36,17 +42,62 @@
         ]);
 
         var complexity_options = {
-          // title: 'Sentiment Chart',
-          hAxis: {title: 'Sentence',  titleTextStyle: {color: '#333'}},
-          // vAxis: {minValue: .4}
-          legend: {position: 'none'},
-          // backgroundColor: {'#d8d8d8'},
-          backgroundColor: {fill:'#f2f2f2'},
-          chartArea:{width:'100%'}
+            // title: 'Sentiment Chart',
+            hAxis: {title: 'Sentence',  titleTextStyle: {color: '#333'}},
+            // vAxis: {minValue: .4}
+            legend: {position: 'none'},
+            // backgroundColor: {'#d8d8d8'},
+            backgroundColor: {fill:'#f2f2f2'},
+            chartArea:{width:'100%'}
         };
 
         var complexity_chart = new google.visualization.AreaChart(document.getElementById('complexity_chart_div'));
         complexity_chart.draw(complexity_data, complexity_options);
+
+        /*
+        **diction chart
+        */
+        var diction_data = google.visualization.arrayToDataTable([
+          ['Word', 'Usage Percentage'],
+          ['Adjectives',     11],
+          ['Verbs',      5],
+          ['Articles',  4],
+          ['Nouns',    7]
+        ]);
+
+        var diction_options = {
+            backgroundColor: {fill:'#f2f2f2'},
+            chartArea:{width:'100%'}
+        };
+
+        var diction_chart = new google.visualization.PieChart(document.getElementById('diction_chart_div'));
+
+        diction_chart.draw(diction_data, diction_options);
+
+        /*
+        **structural chart
+        */
+        var data = google.visualization.arrayToDataTable([
+            ['Month', 'Bolivia'],
+            ['1',  165],
+            ['2',  135],
+            ['3',  157],
+            ['4',  139],
+            ['5',  136]
+        ]);
+
+        var options = {
+            vAxis: {title: "Structural Score"},
+            hAxis: {title: "Paragraph"},
+            seriesType: "bars",
+            series: {5: {type: "line"}},
+            backgroundColor: {fill:'#f2f2f2'},
+            chartArea:{width:'100%'}
+
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('structural_chart_div'));
+        chart.draw(data, options);
 
       }
     </script>
@@ -81,8 +132,13 @@
 
 {% block content2 %}
     <h2>
-        oversused words
+        word usage
     </h2>
+    <div class="panel">
+        diction chart
+        <div id="diction_chart_div"></div>
+
+
     {% for word in synonyms_list %}
         <div class="panel">
             <a class="toggle-expand">[+]</a>
@@ -100,20 +156,8 @@
             </div>          
         </div>
     {% endfor %}
-    <h2>
-        sentiment
-    </h2>
-    <div class="panel">
-        Graph of Sentiment<br>
-        <!-- {{sentiment_trend}} -->
-        <div id="sentiment_chart_div"></div>
-        Average Sentiment<br>
-        {{sentiment_score}}
     </div>
-    <div class="panel">
-        Certainty Score<br>
-        {{certainty_score}}
-    </div>
+
     <h2>
         complexity
     </h2>
@@ -129,10 +173,33 @@
         Max Length<br>
         {{sentence_complexity.max_length}}<br>
     </div>
+
+    <h2>
+        structure
+    </h2>
     <div class="panel">
+        Graph of Structure<br>
+        <div id="structural_chart_div"></div>
         Structure Score<br>
-        {{structural_score}}
+        {{overall_structural_score}}
     </div>
+
+    <h2>
+        sentiment
+    </h2>
+    <div class="panel">
+        Graph of Sentiment<br>
+        <!-- {{sentiment_trend}} -->
+        <div id="sentiment_chart_div"></div>
+        Average Sentiment<br>
+        {{sentiment_score}}
+    </div>
+
+    <div class="panel">
+        Certainty Score<br>
+        {{certainty_score}}
+    </div>
+
 
 </div>    
 {% endblock %}
