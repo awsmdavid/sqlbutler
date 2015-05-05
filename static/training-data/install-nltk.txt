@@ -1,0 +1,90 @@
+Alt.bin
+Skip to content
+About
+Installing Python modules on Hostgator shared hosting using VirtualEnv
+
+By Admin - Published: 09/07/2014 - Category: Hostgator
+Connect to SSH, create a new directory and in it:
+
+> wget http://pypi.python.org/packages/source/v/virtualenv/virtualenv-1.11.6.tar.gz --no-check-certificate
+
+> tar xzf virtualenv-1.11.6.tar.gz
+> rm virtualenv-1.11.6.tar.gz
+
+
+> python virtualenv-1.11.6/virtualenv.py /home1/yourusername/public_html/yourdomain.com/env --no-site-package
+
+Test new Python environement:
+
+> which python
+
+Activate Virtual Environment:
+
+> source env/bin/activate
+
+Test new Python environement:
+
+> which python
+
+Run pip, not the server’s pip,but the new pip that VirtualEnv just installed. Trying installing a package,for example Python Requests:
+
+> bin/pip install requests
+
+Response:
+Downloading/unpacking requests
+Downloading requests-2.4.0-py2.py3-none-any.whl (457kB): 457kB downloaded
+Downloading/unpacking certifi (from requests)
+Downloading certifi-14.05.14.tar.gz (168kB): 168kB downloaded
+Installing collected packages: requests, certifi
+Running setup.py install for certifi
+Successfully installed requests certifi
+Cleaning up...
+
+Test in python:
+
+> Python
+
+>> import requests
+
+If no error message then it works.
+ 
+
+Then you can deactivate VirtualEnv:
+
+> Deactivate
+
+
+
+
+
+CHANGE indx.FCGI
+
+
+#!/usr/local/bin/python
+import sys, os, user
+
+# setup the virtualenv
+os.environ['VIRTUAL_ENV'] = '/home4/davcheng/virtualenv/env'
+
+venv = '/home4/davcheng/virtualenv/env/bin/activate_this.py'
+execfile(venv, dict(__file__=venv))
+
+
+sys.path.insert(0, "/home4/davcheng/essaybetter/essaybet")
+sys.path.insert(0, "/home4/davcheng/essaybetter")
+
+# Switch to the directory of your project.p
+os.chdir("/home4/davcheng/essaybetter/essaybet")
+
+# Set the DJANGO_SETTINGS_MODULE environment variable.
+os.environ['DJANGO_SETTINGS_MODULE'] = "essaybet.settings"
+
+from django.core.servers.fastcgi import runfastcgi
+runfastcgi(method="prefork", daemonize="false")
+
+
+INSTALL NUMPY
+1. easy_install cython
+2. download source
+3. build
+

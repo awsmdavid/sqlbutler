@@ -7,7 +7,7 @@ import string
 # lookup
 import urllib
 import re
-from nltk import word_tokenize, pos_tag
+from nltk import word_tokenize
 # import nltk
 
 # counter
@@ -15894,7 +15894,8 @@ def calcSynonyms(word_list, number):
 
 def parasePartOfSpeech(text):
     words = word_tokenize(text)
-    pos = pos_tag(words)
+    # pos = pos_tag(words)
+    pos = words
     return pos
 
 
