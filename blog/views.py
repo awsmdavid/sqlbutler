@@ -15849,8 +15849,8 @@ def calcDiction(text):
         for word in words:
             if word in SAT_VOCAB:
                 count += 1
-        return count
-        # return count/(len(text.split('. ')))
+        # return count
+        return count/(len(text.split('. ')))
 
 def calcComplexityVariance(text):
     sentence_array = text.split('.')
@@ -15870,6 +15870,18 @@ def calcComplexityVariance(text):
     # text_std = [(len(sentence)-avg_len) for sentence in sentence_array]
 
     return [avg_len, text_std, max_length, min_length, sentence_length_array]
+
+def calcDictionGrade(score):
+    if score>2:
+        return "Incredible"
+    elif score>1:
+        return "Great"
+    elif score>.5:
+        return "Good"
+    elif score>.1:
+        return "Average"
+    else:
+        return "Poor"
 
 def calcComplexityGrade(score):
     if score>60:
@@ -15974,12 +15986,13 @@ def results(request):
 
         part_of_speech = parasePartOfSpeech(text)
         diction_score = calcDiction(text)
+        diction_grade = calcDictionGrade(diction_score)
 
 
         sentence_complexity_data = sentenceComplexityData(complexity_grade=complexity_grade, avg_len=avg_len, complexity_variance=complexity_variance, max_length=max_length, min_length=min_length)
         essay_data = essayData(paragraph_text = paragraphs, text=text, word_list = words, words_count = all_words_count)
         # top_word = word(word=top_word, count=count_of_top_word)
-        return render(request, 'blog/results.html', { 'search_results': essay_data, 'sentence_complexity': sentence_complexity_data, 'top_words': top_words, 'synonyms_list':synonyms_list, 'sentiment_score': sentiment_score, 'sentiment_trend': sentiment_trend, 'certainty_score': certainty_score, 'overall_structural_score': overall_structural_score, 'structural_trend': structural_trend, 'sentence_length_array': sentence_length_array, 'paragraphs': paragraphs, 'diction_score': diction_score, 'part_of_speech': part_of_speech})
+        return render(request, 'blog/results.html', { 'search_results': essay_data, 'sentence_complexity': sentence_complexity_data, 'top_words': top_words, 'synonyms_list':synonyms_list, 'sentiment_score': sentiment_score, 'sentiment_trend': sentiment_trend, 'certainty_score': certainty_score, 'overall_structural_score': overall_structural_score, 'structural_trend': structural_trend, 'sentence_length_array': sentence_length_array, 'paragraphs': paragraphs, 'diction_grade': diction_grade, 'part_of_speech': part_of_speech})
     return render(request, 'blog/index.html')
 
 

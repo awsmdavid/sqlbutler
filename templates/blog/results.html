@@ -157,10 +157,8 @@
         <div id="diction_chart_div"></div>
         <a class="toggle-section-metadata">[+] click for more</a>
         <div class="section-metadata">
-            Parts of Speech<br>
-            {{part_of_speech}}<br>
             Diction Score<br>
-            {{diction_score}}<br>
+            {{diction_grade}}<br>
             Most Used Words<br>
             {% for word in synonyms_list %}
                 <div class="panel">
@@ -185,12 +183,12 @@
         sentence variety
     </h2>
     <div class="panel">
+        Complexity Grade<br>
+        {{sentence_complexity.complexity_grade}}<br>
         Graph of Sentence Complexity
         <div id="complexity_chart_div"></div>
         <a class="toggle-section-metadata">[+] click for more</a>
         <div class="section-metadata">
-            Complexity Grade<br>
-            {{sentence_complexity.complexity_grade}}<br>
             Complexity Variance<br>
             {{sentence_complexity.complexity_variance}}<br>
             {{sentence_complexity.}}
