@@ -7,21 +7,18 @@
         <!-- deployment sheet -->
         <link rel="stylesheet" href="{{STATIC_URL}}/../stylesheets/app.css" /> 
         <script src="{{STATIC_URL}}/../bower_components/modernizr/modernizr.js"></script>
-        <link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
         <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
         <link rel="icon" type="image/jpg" href="http://assets.essaybetter.com/static/eb.ico">
 
         <!--meta content-->
         <meta content='yes' name='apple-mobile-web-app-capable'>
-        <meta content='Ninja SQL Tool!' name='apple-mobile-web-app-title'>
+        <meta content='SQL Butler!' name='apple-mobile-web-app-title'>
         <meta content='default' name='apple-mobile-web-app-status-bar-style'>
         <meta content='width=device-width,height=device-height,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0' name='viewport'>
-        <meta content='Ninja SQL Tool' property='og:title'>
-        <!-- <meta content='http://www.essaybetter.com' property='og:url'> -->
-        <!-- <meta content='http://assets.essaybetter.com/static/eb-logo.png' property='og:image'> -->
-        <!-- <meta content='Improve your writing through analytics and science!' property='og:description'> -->
+        <meta content='SQL Butler' property='og:title'>
+        <meta content='http://www.sqlbutler.com' property='og:url'>
+        <meta content='http://assets.sqlbutler.com/static/sb.png' property='og:image'>
+        <meta content='Create SQL tables in a flash!' property='og:description'>
 
         <!--google chart api-->
 
@@ -41,13 +38,13 @@
                 </a>
             </div>
             <div class="large-4 columns share-container">
-                <a href="https://plus.google.com/share?hl=en-US&url=http%3A%2F%2Fninjasqltool.com" target="_blank">
+                <a href="https://plus.google.com/share?hl=en-US&url=http%3A%2F%2Fsqlbutler.com" target="_blank">
                     <img class="share-button" src="http://assets.essaybetter.com/static/goog.png"/>
                 </a>
-                <a href="http://twitter.com/share?text=Improve%20your%20writing%20with%20analytics%20and%20science!&url=http://www.essaybetter.com" target="_blank">
+                <a href="http://twitter.com/share?text=Stop%20creating%20SQL%20tables%20like%20a%20ssucker&url=http://www.sqlbutler.com" target="_blank">
                     <img class="share-button" src="http://assets.essaybetter.com/static/twtr.png"/>
                 </a>
-                <a href="https://www.facebook.com/sharer/sharer.php?u=essaybetter.com" target="_blank">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=sqlbutler.com" target="_blank">
                     <img class="share-button" src="http://assets.essaybetter.com/static/fb.png"/>
                 </a>
                 
@@ -56,25 +53,16 @@
         </div>
 
         <div class="row">
-          <div class="large-6 columns">
 
-            {% block content1 %}
-
-            {% endblock %}
-            
-          </div>
-          <div class="large-6 columns">
-
-            {% block content2 %}
+            {% block content %}
 
             {% endblock %}
 
-          </div>
         </div>
 
         <div class="row">
             <div id="footer" class="large-12 columns">
-                <a href="http://sqlbutler.com">sqlbutler.com</a> // designed in DC // © 2015</a>                
+                <a href="http://sqlbutler.com">sqlbutler.com</a> // <A href="http://sqlbutler.com/faq">FAQ</a> //designed in DC // © 2015</a>                
             </div>
         </div>
 <!-- -->

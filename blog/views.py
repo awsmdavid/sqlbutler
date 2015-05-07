@@ -8,7 +8,5 @@ import urllib
 def index(request):
     return render(request, 'blog/index.html')
 
-def results(request):
-    if request.method == 'POST':
-        return render(request, 'blog/results.html', { 'search_results': essay_data})
-    return render(request, 'blog/index.html')
+def faq(request):
+    return render(request, 'blog/faq.html')

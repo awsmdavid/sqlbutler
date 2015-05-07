@@ -2,6 +2,10 @@
 // Documentation can be found at: http://foundation.zurb.com/docs
 $(document).foundation();
 
+$("#table_data").on("input", function() {
+    previewTable();
+});
+
 function previewTable(){
     var data = $('textarea[name=table_data]').val();
 	var rows = data.split("\n");
@@ -94,7 +98,7 @@ function generateCreate(){
 	
 	var headers = rows[0].split("\t");
 	for (var x in headers){
-		statement += headers[x];
+		statement += headers[x].split(' ').join('_');
 		console.log(headers[x]);
 		statement += " varchar(150)";
 		if (x<headers.length-1){
@@ -118,7 +122,7 @@ function generateInsert(){
 		if (y<1){
 			var headers = rows[y].split("\t");
 			for (var x in headers){
-				statement += headers[x];
+				statement += headers[x].split(' ').join('_');
 				if (x<headers.length-1){
 					statement+=", ";
 				}

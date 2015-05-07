@@ -1,4 +1,4 @@
-# Ninja SQL
+# SQL Butler
 
 Work in progress
 
