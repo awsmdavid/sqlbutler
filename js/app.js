@@ -84,7 +84,7 @@ function generateInsert(){
 			//check if number of cells equals number of columns
 			if (rowCellCount==columnCount){
 				for(var z in cells){
-					statement += cells[z];
+					statement += "'" + cells[z] + "'";
 					if (z<cells.length-1){
 						statement+=", ";
 
@@ -106,7 +106,7 @@ function generateInsert(){
 
 					// if the current cell has any contents
 					if (cells[i].length > 0){
-						statement += cells[i];
+						statement += "'" + cells[i] + "'";
 						console.log(rowCellCount);
 						if (rowCellCount==columnCount){
 							// console.log(cells + " " + cells.length + "///rcc: " +rowCellCount);
@@ -124,6 +124,6 @@ function generateInsert(){
 		}
 	}
 	statement +=");";
-	$('#create_statement').html(statement);
+	$('#insert_statement').html(statement);
 	// $('#excel_table').html(statement);
 }

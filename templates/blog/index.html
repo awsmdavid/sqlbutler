@@ -5,7 +5,7 @@
         <textarea name="table_name"></textarea><br>
     <p>Paste table here:</p>
         <textarea name="excel_data" style="height: 300px;"></textarea><br>
-        <input type="button" onclick="generateInsert()" value="Generate Table"/>
+        <input type="button" onclick="generateCreate(), generateInsert()" value="Generate Table"/>
     <br><br>
         <p>Table data will appear below</p>
     <hr>
@@ -17,7 +17,8 @@
     <p>Your create and insert statements will appear here:</p>
 
     <div id="create_statement"></div>
-
+    <br>
+    <div id="insert_statement"></div>
 {% endblock %}
 
 
