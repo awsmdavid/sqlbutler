@@ -1,15 +1,13 @@
 // Foundation JavaScript
 // Documentation can be found at: http://foundation.zurb.com/docs
 $(document).foundation();
-// var orignal_text = $('#original-text').html();
 
 function previewTable(){
-    var data = $('textarea[name=excel_data]').val();
-    console.log(data);
+    var data = $('textarea[name=table_data]').val();
 	var rows = data.split("\n");
-    console.log(rows[0]);
-
 	var table = $('<table />');
+	var rowCellCount =0;
+	var columnCount = rows[0].split("\t").length;
 	for(var y in rows) {
 		var cells = rows[y].split("\t");
 		var row = $('<tr />');
@@ -20,15 +18,78 @@ function previewTable(){
 	}
 
 	// Insert into DOM
-	$('#excel_table').html(table);
+	$('#preview-header').html("<h2>Preview</h2><p>This is what your table will look like:</p>");
+	$('#table_preview').html(table);
 
 }
 
 
+// function previewTable(){
+
+//     var data = $('textarea[name=excel_data]').val();
+// 	var rows = data.split("\n");
+// 	var table = $('<table />');
+// 	var rowCellCount =0;
+// 	var columnCount = rows[0].split("\t").length;
+// 	var row = $('<tr />');
+// 	for(var y in rows) {
+// 		// var row = $('<tr />');
+// 		// for(var x in cells) {
+// 		// 	row.append('<td>'+cells[x]+'</td>');
+// 		// }
+// 		// table.append(row);
+	
+// 		if (cells[0].length > 0){
+// 			rowCellCount += cells.length;
+// 		}
+// 		//check if number of cells equals number of columns
+// 		if (rowCellCount==columnCount){
+// 			for(var z in cells){
+// 				statement += "'" + cells[z] + "'";
+// 				if (z<cells.length-1){
+// 					statement+=", ";
+
+// 				}
+// 				else{
+// 					console.log(y + " "+ rows.length);
+// 					if (y<rows.length-1){
+// 						statement+="), (";
+// 					}
+// 				}
+// 			}
+// 			//reset cellcount
+// 			rowCellCount = 0;
+// 		}
+// 		//incomplete row detected
+// 		else{
+// 			//loop through all cells in the incomplete row
+// 			for(var i in cells){
+
+// 				// if the current cell has any contents
+// 				if (cells[i].length > 0){
+// 					statement += "'" + cells[i] + "'";
+// 					console.log(rowCellCount);
+// 					if (rowCellCount==columnCount){
+// 						// console.log(cells + " " + cells.length + "///rcc: " +rowCellCount);
+// 						statement+=")";
+// 						rowCellCount = 0;
+// 					}
+// 					else{
+// 						statement+=", ";
+// 					}
+
+// 				}
+// 			}
+// 		}
+
+// 	}
+// 	// Insert into DOM
+// 	$('#excel_table').html(table);
+// }
 
 function generateCreate(){
-	var statement = "CREATE TABLE " + $('textarea[name=table_name]').val() +" (";
-    var data = $('textarea[name=excel_data]').val();
+	var statement = "CREATE TABLE " + $('input[name=table_name]').val() +" (";
+    var data = $('textarea[name=table_data]').val();
 	var rows = data.split("\n");
 	
 	var headers = rows[0].split("\t");
@@ -46,8 +107,8 @@ function generateCreate(){
 }
 
 function generateInsert(){
-	var statement = "INSERT INTO " + $('textarea[name=table_name]').val() +" (";
-    var data = $('textarea[name=excel_data]').val();
+	var statement = "INSERT INTO " + $('input[name=table_name]').val() +" (";
+    var data = $('textarea[name=table_data]').val();
 	var rows = data.split("\n");
 	var rowCellCount =0;
 	var columnCount = rows[0].split("\t").length;

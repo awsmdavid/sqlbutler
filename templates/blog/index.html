@@ -2,14 +2,14 @@
 {% block content1 %}
     <h2>Input</h2>
     <p>Enter table name:</p>
-        <textarea name="table_name"></textarea><br>
-    <p>Paste table here:</p>
-        <textarea name="excel_data" style="height: 300px;"></textarea><br>
-        <input type="button" onclick="generateCreate(), generateInsert(), previewTable()" value="Generate Table"/>
+        <input type="text" name="table_name" placeholder="TABLE_NAME" />
+        <br>
+    <p>Paste table contents:</p>
+        <textarea name="table_data" placeholder="TABLE CONTENTS" style="height: 300px;"></textarea><br>
+        <input type="button" class="button" onclick="generateCreate(), generateInsert(), previewTable()" value="Generate Table"/>
     <br><br>
-        <p>This is what your table will look like:</p>
-    <hr>
-    <div id="excel_table">yo</div>
+        <div id="preview-header"></div>
+        <div id="table_preview"></div>
 {% endblock %}
 
 {% block content2 %}
