@@ -6,7 +6,7 @@
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 #BASE_DIR = '/home4/davcheng/djangro/'
-WSGI_APPLICATION = 'essaybet.wsgi.application'
+WSGI_APPLICATION = 'ninjasql.wsgi.application'
 #end custom adds
 
 
@@ -22,7 +22,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'essaybet.db',
+        'NAME': 'ninjasql.db',
     }
 }
 
@@ -78,7 +78,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(BASE_DIR, "essaybet/static"),
+    os.path.join(BASE_DIR, "ninjasql/static"),
     #'/var/www/static/',
 )
 
@@ -109,13 +109,13 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfResponseMiddleware',
 )
 
-ROOT_URLCONF = 'essaybet.urls'
+ROOT_URLCONF = 'ninjasql.urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(BASE_DIR, 'essaybet/templates'),
+    os.path.join(BASE_DIR, 'ninjasql/templates'),
 )
 
 INSTALLED_APPS = (
@@ -151,7 +151,3 @@ LOGGING = {
         },
     }
 }
-
-
-
-

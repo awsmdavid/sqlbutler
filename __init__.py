@@ -1,2 +1,2 @@
 import os
-os.environ['DJANGO_SETTINGS_MODULE'] = 'essaybet.settings'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'ninjasql.settings'

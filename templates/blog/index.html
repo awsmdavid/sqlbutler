@@ -1,48 +1,26 @@
 {% extends 'base.html' %}
- 
 {% block content1 %}
-    <h2>Enter Text</h2>
-    <section class="input-form">
-        <form action="/results/" method="POST">
-            {% csrf_token %}
-
-            <textarea name="text" rows="20" cols="60">{{ text }}</textarea>
-            <br>
-            <!-- <input id="textform" type="text" name="text"><br> -->
-            <div class="row">
-                <div class="large-12 columns">
-                    <center>
-                        <input id="submit-button" class="secondary button" type="submit" value="Submit">
-                    </center>
-                </div>
-            <div>
-        </form>
-    </section>
+    <h2>Input</h2>
+    <p>Enter table name:</p>
+        <textarea name="table_name"></textarea><br>
+    <p>Paste table here:</p>
+        <textarea name="excel_data" style="height: 300px;"></textarea><br>
+        <input type="button" onclick="generateInsert()" value="Generate Table"/>
+    <br><br>
+        <p>Table data will appear below</p>
+    <hr>
+    <div id="excel_table">yo</div>
 {% endblock %}
 
 {% block content2 %}
-    <h2>FAQ</h2>
-    <div class="panel">
-        <h5>What is this?</h5>
-    </div>
-    <div class="faq">
-        Essay Better - make your words more compelling, convincing, and impactful!
-    </div>
-    <br>
-    <div class="panel">
-        <h5>How does this work?</h5>
-    </div>
-    <div class="faq">
-        Through natural language processing, binarized multinomial naive bayesian probability, and jiggery-pokery.
-    </div>
-    <br>
-    <div class="panel">
-        <h5>Where do I start?</h5>
-    </div>
-    <div class="faq">
-        Paste an email, essay, tweet - or angry complaint to your least favorite airline - in the text box and hit submit!
-    </div>
-    <br>
+    <h2>Output</h2>
+    <p>Your create and insert statements will appear here:</p>
+
+    <div id="create_statement"></div>
 
 {% endblock %}
+
+
+
+
 
