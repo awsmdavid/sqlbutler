@@ -2,49 +2,59 @@
 HOME
 **/
 /* line 12, ../scss/_settings.scss */
+.kwd {
+  color: #00008b;
+}
+
+/* line 16, ../scss/_settings.scss */
+.str {
+  color: #800000;
+}
+
+/* line 21, ../scss/_settings.scss */
 .faq {
   margin: 0 15px;
 }
 
-/* line 15, ../scss/_settings.scss */
+/* line 24, ../scss/_settings.scss */
 #submit-button {
   float: right;
 }
 
-/* line 23, ../scss/_settings.scss */
+/* line 32, ../scss/_settings.scss */
 .share-button {
   height: 30px;
   float: right;
   margin: 15px 5px;
 }
 
-/* line 29, ../scss/_settings.scss */
+/* line 38, ../scss/_settings.scss */
 .share-button:hover {
   opacity: .7;
 }
 
-/* line 33, ../scss/_settings.scss */
+/* line 42, ../scss/_settings.scss */
 #footer {
   text-align: right;
   bottom: 0;
 }
 
-/* line 38, ../scss/_settings.scss */
+/* line 47, ../scss/_settings.scss */
 .highlighted-text {
   background: yellow;
 }
 
-/* line 42, ../scss/_settings.scss */
+/* line 51, ../scss/_settings.scss */
 .highlighted-paragraph {
   background: #99CCFF;
 }
 
-/* line 46, ../scss/_settings.scss */
+/* line 55, ../scss/_settings.scss */
 .section-metadata {
   display: none;
 }
 
-/* line 50, ../scss/_settings.scss */
+/* line 59, ../scss/_settings.scss */
 .word-metadata {
   display: none;
 }

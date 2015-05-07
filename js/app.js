@@ -88,7 +88,7 @@ function previewTable(){
 // }
 
 function generateCreate(){
-	var statement = "CREATE TABLE " + $('input[name=table_name]').val() +" (";
+	var statement = "<span class='kwd'>CREATE TABLE </span>" + $('input[name=table_name]').val().split(' ').join('_') +" (";
     var data = $('textarea[name=table_data]').val();
 	var rows = data.split("\n");
 	
@@ -103,11 +103,11 @@ function generateCreate(){
 	}
 	statement +=");";
 
-	$('#create_statement').html(statement);
+	$('#create_statement').html("<p>Results:</p><div class='panel'>" + statement+"</div>");
 }
 
 function generateInsert(){
-	var statement = "INSERT INTO " + $('input[name=table_name]').val() +" (";
+	var statement = "<span class='kwd'>INSERT INTO </span>" + $('input[name=table_name]').val() +" (";
     var data = $('textarea[name=table_data]').val();
 	var rows = data.split("\n");
 	var rowCellCount =0;
@@ -123,7 +123,7 @@ function generateInsert(){
 					statement+=", ";
 				}
 				else {
-					statement+=") VALUES (";
+					statement+=") <span class='kwd'>VALUES </span>(";
 				}
 			}
 		}
@@ -138,7 +138,7 @@ function generateInsert(){
 			//check if number of cells equals number of columns
 			if (rowCellCount==columnCount){
 				for(var z in cells){
-					statement += "'" + cells[z] + "'";
+					statement += "<span class='str'>'" + cells[z] + "'</span>";
 					if (z<cells.length-1){
 						statement+=", ";
 
@@ -160,7 +160,7 @@ function generateInsert(){
 
 					// if the current cell has any contents
 					if (cells[i].length > 0){
-						statement += "'" + cells[i] + "'";
+						statement += "<span class='str'>'" + cells[i] + "'</span>";
 						console.log(rowCellCount);
 						if (rowCellCount==columnCount){
 							// console.log(cells + " " + cells.length + "///rcc: " +rowCellCount);
@@ -178,6 +178,6 @@ function generateInsert(){
 		}
 	}
 	statement +=");";
-	$('#insert_statement').html(statement);
+	$('#insert_statement').html("<div class='panel'>" + statement+"</div>");
 	// $('#excel_table').html(statement);
 }
