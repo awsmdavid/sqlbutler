@@ -3,20 +3,13 @@
 $(document).foundation();
 // var orignal_text = $('#original-text').html();
 
-function alert(){
-	var data = $('textarea[name=excel_data]').val();
-    console.log(data);
-}
-
-function generateTable(){
+function previewTable(){
     var data = $('textarea[name=excel_data]').val();
     console.log(data);
 	var rows = data.split("\n");
     console.log(rows[0]);
 
 	var table = $('<table />');
-
-
 	for(var y in rows) {
 		var cells = rows[y].split("\t");
 		var row = $('<tr />');

@@ -51,19 +51,6 @@ HOME
 	display:none;
 }
 
-//results
-
-// .suggestion-panel {
-//   @include panel(
-//     // Sets the panel background color. Default: $panel-pg
-//     $bg:white,
-//     // Sets the panel padding amount. Default: $panel-padding
-//     $padding:20px,
-//     // Sets the font color based on the darkness of the bg & resets header line-heights for panels. Default: $panel-header-adjust
-//     $adjust:true
-//   );
-// }
-
 
 
 // Table of Contents
@@ -151,7 +138,7 @@ $include-html-global-classes: $include-html-classes;
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // We use these to define default font stacks
-$font-family-sans-serif: 'Fjalla One', sans-serif;
+$font-family-sans-serif: "Courier new", monospace;
 // $font-family-serif: Georgia, Cambria, "Times New Roman", Times, serif;
 // $font-family-monospace: Consolas, "Liberation Mono", Courier, monospace;
 

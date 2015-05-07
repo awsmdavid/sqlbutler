@@ -5,9 +5,9 @@
         <textarea name="table_name"></textarea><br>
     <p>Paste table here:</p>
         <textarea name="excel_data" style="height: 300px;"></textarea><br>
-        <input type="button" onclick="generateCreate(), generateInsert()" value="Generate Table"/>
+        <input type="button" onclick="generateCreate(), generateInsert(), previewTable()" value="Generate Table"/>
     <br><br>
-        <p>Table data will appear below</p>
+        <p>This is what your table will look like:</p>
     <hr>
     <div id="excel_table">yo</div>
 {% endblock %}
