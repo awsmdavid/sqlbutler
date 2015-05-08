@@ -1,7 +1,7 @@
 // Foundation JavaScript
 // Documentation can be found at: http://foundation.zurb.com/docs
 $(document).foundation();
-
+console.log("Hello! Thanks for using SQL Butler");
 $("#table_data").on("input", function() {
     previewTable();
 });
@@ -97,11 +97,10 @@ function generateCreate(){
 	var rows = data.split("\n");
 	
 	var headers = rows[0].split("\t");
-	for (var x in headers){
-		statement += headers[x].split(' ').join('_');
-		console.log(headers[x]);
+	for (var header in headers){
+		statement += headers[header].split(' ').join('_');
 		statement += " varchar(150)";
-		if (x<headers.length-1){
+		if (header<headers.length-1){
 			statement+=", ";
 		}
 	}
@@ -117,13 +116,13 @@ function generateInsert(){
 	var rowCellCount =0;
 	var columnCount = rows[0].split("\t").length;
 
-	for (var y in rows){
+	for (var row in rows){
 		//find column names
-		if (y<1){
-			var headers = rows[y].split("\t");
-			for (var x in headers){
-				statement += headers[x].split(' ').join('_');
-				if (x<headers.length-1){
+		if (row<1){
+			var headers = rows[row].split("\t");
+			for (var header in headers){
+				statement += headers[header].split(' ').join('_');
+				if (header<headers.length-1){
 					statement+=", ";
 				}
 				else {
@@ -134,22 +133,21 @@ function generateInsert(){
 		//start breaking down rows to insert
 
 		else {
-			var cells = rows[y].split("\t");
+			var cells = rows[row].split("\t");
 			if (cells[0].length > 0){
 				rowCellCount += cells.length;
 			}
 
 			//check if number of cells equals number of columns
 			if (rowCellCount==columnCount){
-				for(var z in cells){
-					statement += "<span class='str'>'" + cells[z] + "'</span>";
-					if (z<cells.length-1){
+				for(var cell in cells){
+					statement += "<span class='str'>'" + cells[cell] + "'</span>";
+					if (cell<cells.length-1){
 						statement+=", ";
 
 					}
 					else{
-						console.log(y + " "+ rows.length);
-						if (y<rows.length-1){
+						if (row<rows.length-1){
 							statement+="), (";
 						}
 					}
@@ -160,12 +158,10 @@ function generateInsert(){
 			//incomplete row detected
 			else{
 				//loop through all cells in the incomplete row
-				for(var i in cells){
-
+				for(var cell in cells){
 					// if the current cell has any contents
-					if (cells[i].length > 0){
-						statement += "<span class='str'>'" + cells[i] + "'</span>";
-						console.log(rowCellCount);
+					if (cells[cell].length > 0){
+						statement += "<span class='str'>'" + cells[cell] + "'</span>";
 						if (rowCellCount==columnCount){
 							// console.log(cells + " " + cells.length + "///rcc: " +rowCellCount);
 							statement+=")";
