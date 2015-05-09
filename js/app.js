@@ -3,21 +3,21 @@
 $(document).foundation();
 console.log("Hello! Thanks for using SQL Butler");
 $("#table_data").on("input", function() {
-    previewTable4();
+    previewTable();
 });
 
-function previewTable4(){
+function previewTable(){
     var data = $('textarea[name=table_data]').val();
 	var rows = data.split("\n");
 	var table = $('<table />');
 	var rowCellCount =0;
 	var columnCount = rows[0].split("\t").length;
 	//for each line in the graph
+	var incomplete_row_bool = false;
+	var incomplete_row = "";
 	for(var y in rows) {
 		var cells = rows[y].split("\t");
 		var row = $('<tr />');
-		var incomplete_row = $('<tr />');
-		var incomplete_row_bool = false;
 		rowCellCount+=cells.length;
 		//if the row is complete
 		if (rowCellCount>=columnCount){
@@ -31,8 +31,11 @@ function previewTable4(){
 			}
 			else{
 				for(var xprime in cells) {
-					incomplete_row.append('<td>'+cells[xprime].split(' ').join('_')+'</td>');
+					var str = '<td>'+cells[xprime].split(' ').join('_')+'</td>';
+					incomplete_row+='<td>'+cells[xprime].split(' ').join('_')+'</td>';
+					console.log(incomplete_row);
 				}
+				row.append(incomplete_row);
 				table.append(row);
 				incomplete_row_bool=false;
 			}
@@ -40,10 +43,12 @@ function previewTable4(){
 		//if the row is not complete
 		else{
 			for(var z in cells){
-				rowCellCount+=1;
-				incomplete_row.append('<td>'+cells[z].split(' ').join('_')+'</td>');
-				incomplete_row_bool=true;
-				console.log(cells[z]);
+				if (cells[z].length>0){
+					rowCellCount+=1;
+					incomplete_row+='<td>'+cells[z].split(' ').join('_')+'</td>';
+					console.log(incomplete_row);
+					incomplete_row_bool=true;
+				}
 			}
 		}
 	}
@@ -53,7 +58,7 @@ function previewTable4(){
 	$('#table_preview').html(table);
 
 }
-
+/**
 function previewTable(){
     var data = $('textarea[name=table_data]').val();
 	var rows = data.split("\n");
@@ -72,6 +77,7 @@ function previewTable(){
 	$('#table_preview').html(table);
 
 }
+**/
 
 function previewTable2(){
     var data = $('textarea[name=table_data]').val();
