@@ -3,8 +3,37 @@
 $(document).foundation();
 console.log("Hello! Thanks for using SQL Butler");
 $("#table_data").on("input", function() {
-    previewTable();
+    previewTable4();
 });
+
+function previewTable4(){
+    var data = $('textarea[name=table_data]').val();
+	var rows = data.split("\n");
+	var table = $('<table />');
+	var rowCellCount =0;
+	var columnCount = rows[0].split("\t").length;
+	var row = $('<tr />');
+	for(var y in rows) {
+		var cells = rows[y].split("\t");
+		rowCellCount+=cells.length;
+		for(var x in cells) {
+			row.append('<td>'+cells[x].split(' ').join('_')+'</td>');
+				console.log(cells[x]);
+			if (rowCellCount>=columnCount){
+
+				row = $('<tr />');
+				rowCellCount=0;
+			}
+
+		}
+		table.append(row);
+	}
+
+	// Insert into DOM
+	$('#preview-header').html("<h2>Preview</h2><p>This is what your table will look like:</p>");
+	$('#table_preview').html(table);
+
+}
 
 function previewTable(){
     var data = $('textarea[name=table_data]').val();
@@ -16,7 +45,7 @@ function previewTable(){
 		var cells = rows[y].split("\t");
 		var row = $('<tr />');
 		for(var x in cells) {
-			row.append('<td>'+cells[x]+'</td>');
+			row.append('<td>'+cells[x].split(' ').join('_')+'</td>');
 		}
 		table.append(row);
 	}
@@ -27,69 +56,95 @@ function previewTable(){
 
 }
 
+function previewTable2(){
+    var data = $('textarea[name=table_data]').val();
+	var rows = data.split("\n");
+	var table = $('<table />');
+	var rowCellCount =0;
+	var columnCount = rows[0].split("\t").length;
+	var count =0;
+	for(var i in rows) {
+		console.log(count +" "+ columnCount);
+		var headers = rows[i].split("\t");
+		var row_html = $('<tr />');
+		for (var header in headers){
+			if (count<columnCount){
+				row_html.append('<td>'+headers[header].split(' ').join('_')+'</td>');
+				count+=1;
+			}
+			if (count>=columnCount){
+				table.append(row_html);
+			}
+		}
 
-// function previewTable(){
+	// Insert into DOM
+	$('#preview-header').html("<h2>Preview</h2><p>This is what your table will look like:</p>");
+	$('#table_preview').html(table);
+	}
+}
 
-//     var data = $('textarea[name=excel_data]').val();
-// 	var rows = data.split("\n");
-// 	var table = $('<table />');
-// 	var rowCellCount =0;
-// 	var columnCount = rows[0].split("\t").length;
-// 	var row = $('<tr />');
-// 	for(var y in rows) {
-// 		// var row = $('<tr />');
-// 		// for(var x in cells) {
-// 		// 	row.append('<td>'+cells[x]+'</td>');
-// 		// }
-// 		// table.append(row);
+function previewTable1(){
+    var data = $('textarea[name=table_data]').val();
+	var rows = data.split("\n");
+	var table = $('<table />');
+	var rowCellCount =0;
+	var columnCount = rows[0].split("\t").length;
+	var row_html = $('<tr />');
 	
-// 		if (cells[0].length > 0){
-// 			rowCellCount += cells.length;
-// 		}
-// 		//check if number of cells equals number of columns
-// 		if (rowCellCount==columnCount){
-// 			for(var z in cells){
-// 				statement += "'" + cells[z] + "'";
-// 				if (z<cells.length-1){
-// 					statement+=", ";
+	for(var row in rows) {
+		if (row<1){
+			var headers = rows[row].split("\t");
+			for (var header in headers){
+				row_html.append('<td>'+headers[header].split(' ').join('_')+'</td>');
+			}
+			table.append(row_html);
+		}
 
-// 				}
-// 				else{
-// 					console.log(y + " "+ rows.length);
-// 					if (y<rows.length-1){
-// 						statement+="), (";
-// 					}
-// 				}
-// 			}
-// 			//reset cellcount
-// 			rowCellCount = 0;
-// 		}
-// 		//incomplete row detected
-// 		else{
-// 			//loop through all cells in the incomplete row
-// 			for(var i in cells){
+		else{
+			var cells = rows[row].split("\t");
+			if (cells[0].length > 0){
+				rowCellCount += cells.length;
+			}
+			console.log("row "+row +" rcc "+rowCellCount + " cc " +columnCount);
 
-// 				// if the current cell has any contents
-// 				if (cells[i].length > 0){
-// 					statement += "'" + cells[i] + "'";
-// 					console.log(rowCellCount);
-// 					if (rowCellCount==columnCount){
-// 						// console.log(cells + " " + cells.length + "///rcc: " +rowCellCount);
-// 						statement+=")";
-// 						rowCellCount = 0;
-// 					}
-// 					else{
-// 						statement+=", ";
-// 					}
+			//check if number of cells equals number of columns
+			if (rowCellCount==columnCount){
+				for(var cell in cells){
+					row_html.append('<td>'+cells[cell].split(' ').join('_')+'</td>');
+					if (cell>=cells.length-1){
+						table.append(row_html);
+					}
+				}
+				//reset cellcount
+				rowCellCount = 0;
+			}
+			//incomplete row detected
+			else{
+				//loop through all cells in the incomplete row
+				for(var cel in cells){
+					// if the current cell has any contents
+					if (cells[cel].length > 0){
+						row_html.append('<td>'+cells[cel].split(' ').join('_')+'</td>');
+						if (rowCellCount==columnCount){
+							// console.log(cells + " " + cells.length + "///rcc: " +rowCellCount);
+							table.append(row_html);
+							rowCellCount = 0;
+						}
+					}
+				}
 
-// 				}
-// 			}
-// 		}
+			}
+		}
+		table.append(row);
+	}
+	
 
-// 	}
-// 	// Insert into DOM
-// 	$('#excel_table').html(table);
-// }
+	// Insert into DOM
+	$('#preview-header').html("<h2>Preview</h2><p>This is what your table will look like:</p>");
+	$('#table_preview').html(table);
+
+
+}
 
 function generateCreate(){
 	var statement = "<span class='kwd'>CREATE TABLE </span>" + $('input[name=table_name]').val().split(' ').join('_') +" (";
@@ -108,6 +163,12 @@ function generateCreate(){
 
 	$('#create_statement').html("<p>Results:</p><div class='panel'>" + statement+"</div>");
 }
+
+
+
+
+
+
 
 function generateInsert(){
 	var statement = "<span class='kwd'>INSERT INTO </span>" + $('input[name=table_name]').val() +" (";
@@ -131,7 +192,6 @@ function generateInsert(){
 			}
 		}
 		//start breaking down rows to insert
-
 		else {
 			var cells = rows[row].split("\t");
 			if (cells[0].length > 0){
@@ -158,10 +218,10 @@ function generateInsert(){
 			//incomplete row detected
 			else{
 				//loop through all cells in the incomplete row
-				for(var cell in cells){
+				for(var cel in cells){
 					// if the current cell has any contents
-					if (cells[cell].length > 0){
-						statement += "<span class='str'>'" + cells[cell] + "'</span>";
+					if (cells[cel].length > 0){
+						statement += "<span class='str'>'" + cells[cel] + "'</span>";
 						if (rowCellCount==columnCount){
 							// console.log(cells + " " + cells.length + "///rcc: " +rowCellCount);
 							statement+=")";
@@ -179,5 +239,4 @@ function generateInsert(){
 	}
 	statement +=");";
 	$('#insert_statement').html("<div class='panel'>" + statement+"</div>");
-	// $('#excel_table').html(statement);
 }

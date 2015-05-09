@@ -8,25 +8,25 @@
     </p>
     <h3>Why would anyone use this?</h3>
     <p>
-        While studying up on SQL for a technical interview, I wanted to practice joining tables and selecting rows. However, a few hours into my cram session, I realized something - I hadn't learned jack because I had spent 90% my time creating and populating practice tables (rather than actually practicing JOINs and SELECTs i.e., what the actual interviewers cared about). 
+        While studying up on SQL for a technical interview, I wanted to practice joining tables and selecting rows. However, a few hours into my cram session, I realized I hadn't learned jack because I had been spending 90% my time creating and populating dummy tables to work with rather than actually practicing JOINs and SELECTs (i.e., what the actual interviewers cared about). 
         <br>
         <br>
-        SQL Butler seeks to remedy this problem so that you can spend more time learning and less time data entry-ing... and hopefully get the job that I didn't.  
+        SQL Butler seeks to remedy this problem so that you can spend more time learning and less time data entry-ing.  
     </p>
     <h3>How do I use this?</h3>
     <p>
         <ol>
             <li>Boot up your favorite instance of SQL (e.g., mysql)</li>
-            <li>Create a practice DB (<span class="kwd">CREATE DATABASE</span> ____;)</li>
-            <li>Select the database (<span class="kwd">USE</span> ____;)</li>
+            <li>Create a practice DB (<span class="kwd">CREATE DATABASE</span> PRACTICE_DB;)</li>
+            <li>Select the database (<span class="kwd">USE</span> PRACTICE_DB;)</li>
             <li>Copy and paste any table you find in some <a href="http://www.programmerinterview.com/index.php/database-sql/practice-interview-question-1/" target="_blank">SQL interview prep blog</a>, <a href="http://www.w3schools.com/sql/sql_join_left.asp" target="_blank">w3schools article</a>, or Excel spreadsheet into the Table Contents text area</li>
-            <li>Name your table (if your table name is not one word, a mandatory SQL requirement, underscores will be used to replace spaces)</li>
+            <li>Name your table (if your table name is not one word, a mandatory SQL requirement, underscores will be used in place of spaces)</li>
             <li>Hit "Generate" and use the statements to create the table in your DB!</li>
         </ol>
     </p>
     <h3>Why is every column a varchar(150)?</h3>
     <p>
-        Edit your own damn data types. Just kidding, I figured if you're using this to practice joining tables, the data types don't <i>really</i> matter. Plus, the CREATE statement is pretty easy to edit/isn't the one that is horribly tedious to come up with - it's the insert statements that suck. And from a UI perspective, I didn't want to bog down the input area with an array of drop downs (pretty good excuses, right?).
+        Edit your own damn data types. Just kidding, I figured if you're using this to practice joining tables, the data types don't <i>really</i> matter. Plus, the CREATE statement is pretty easy to edit/isn't horribly tedious to come up with (it's the insert statements that suck). And from a UI perspective, I didn't want to bog down the input area with an array of drop downs (pretty good excuses, right?).
     </p>
     <h3>What if I love manually typing up CREATE/INSERT statements for large tables?</h3>
     <p>
