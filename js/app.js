@@ -58,116 +58,6 @@ function previewTable(){
 	$('#table_preview').html(table);
 
 }
-/**
-function previewTable(){
-    var data = $('textarea[name=table_data]').val();
-	var rows = data.split("\n");
-	var table = $('<table />');
-	for(var y in rows) {
-		var cells = rows[y].split("\t");
-		var row = $('<tr />');
-		for(var x in cells) {
-			row.append('<td>'+cells[x].split(' ').join('_')+'</td>');
-		}
-		table.append(row);
-	}
-
-	// Insert into DOM
-	$('#preview-header').html("<h2>Preview</h2><p>This is what your table will look like:</p>");
-	$('#table_preview').html(table);
-
-}
-**/
-
-function previewTable2(){
-    var data = $('textarea[name=table_data]').val();
-	var rows = data.split("\n");
-	var table = $('<table />');
-	var rowCellCount =0;
-	var columnCount = rows[0].split("\t").length;
-	var count =0;
-	for(var i in rows) {
-		console.log(count +" "+ columnCount);
-		var headers = rows[i].split("\t");
-		var row_html = $('<tr />');
-		for (var header in headers){
-			if (count<columnCount){
-				row_html.append('<td>'+headers[header].split(' ').join('_')+'</td>');
-				count+=1;
-			}
-			if (count>=columnCount){
-				table.append(row_html);
-			}
-		}
-
-	// Insert into DOM
-	$('#preview-header').html("<h2>Preview</h2><p>This is what your table will look like:</p>");
-	$('#table_preview').html(table);
-	}
-}
-
-function previewTable1(){
-    var data = $('textarea[name=table_data]').val();
-	var rows = data.split("\n");
-	var table = $('<table />');
-	var rowCellCount =0;
-	var columnCount = rows[0].split("\t").length;
-	var row_html = $('<tr />');
-	
-	for(var row in rows) {
-		if (row<1){
-			var headers = rows[row].split("\t");
-			for (var header in headers){
-				row_html.append('<td>'+headers[header].split(' ').join('_')+'</td>');
-			}
-			table.append(row_html);
-		}
-
-		else{
-			var cells = rows[row].split("\t");
-			if (cells[0].length > 0){
-				rowCellCount += cells.length;
-			}
-			console.log("row "+row +" rcc "+rowCellCount + " cc " +columnCount);
-
-			//check if number of cells equals number of columns
-			if (rowCellCount==columnCount){
-				for(var cell in cells){
-					row_html.append('<td>'+cells[cell].split(' ').join('_')+'</td>');
-					if (cell>=cells.length-1){
-						table.append(row_html);
-					}
-				}
-				//reset cellcount
-				rowCellCount = 0;
-			}
-			//incomplete row detected
-			else{
-				//loop through all cells in the incomplete row
-				for(var cel in cells){
-					// if the current cell has any contents
-					if (cells[cel].length > 0){
-						row_html.append('<td>'+cells[cel].split(' ').join('_')+'</td>');
-						if (rowCellCount==columnCount){
-							// console.log(cells + " " + cells.length + "///rcc: " +rowCellCount);
-							table.append(row_html);
-							rowCellCount = 0;
-						}
-					}
-				}
-
-			}
-		}
-		table.append(row);
-	}
-	
-
-	// Insert into DOM
-	$('#preview-header').html("<h2>Preview</h2><p>This is what your table will look like:</p>");
-	$('#table_preview').html(table);
-
-
-}
 
 function generateCreate(){
 	var statement = "<span class='kwd'>CREATE TABLE </span>" + $('input[name=table_name]').val().split(' ').join('_') +" (";
@@ -186,12 +76,6 @@ function generateCreate(){
 
 	$('#create_statement').html("<p>Results:</p><div class='panel'>" + statement+"</div>");
 }
-
-
-
-
-
-
 
 function generateInsert(){
 	var statement = "<span class='kwd'>INSERT INTO </span>" + $('input[name=table_name]').val() +" (";
